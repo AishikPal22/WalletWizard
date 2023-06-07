@@ -3970,19 +3970,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\AP\\.nuget\\packages\\": {}
+    "C:\\Users\\2270322\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Documents\\WORK\\C#\\PROJECTS\\ExpenseTrackerApplication\\ExpenseTrackerApplication.csproj",
+      "projectUniqueName": "C:\\Users\\2270322\\source\\repos\\PROJECT\\Expense-Management-App\\ExpenseTrackerApplication\\ExpenseTrackerApplication.csproj",
       "projectName": "ExpenseTrackerApplication",
-      "projectPath": "D:\\Documents\\WORK\\C#\\PROJECTS\\ExpenseTrackerApplication\\ExpenseTrackerApplication.csproj",
-      "packagesPath": "C:\\Users\\AP\\.nuget\\packages\\",
-      "outputPath": "D:\\Documents\\WORK\\C#\\PROJECTS\\ExpenseTrackerApplication\\obj\\",
+      "projectPath": "C:\\Users\\2270322\\source\\repos\\PROJECT\\Expense-Management-App\\ExpenseTrackerApplication\\ExpenseTrackerApplication.csproj",
+      "packagesPath": "C:\\Users\\2270322\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\2270322\\source\\repos\\PROJECT\\Expense-Management-App\\ExpenseTrackerApplication\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\AP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\2270322\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4062,7 +4067,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

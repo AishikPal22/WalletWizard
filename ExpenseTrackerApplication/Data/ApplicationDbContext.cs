@@ -11,7 +11,7 @@ namespace ExpenseTrackerApplication.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=MyNotebook;Database=APIExpenseTrackerDb;Trusted_Connection=True;Encrypt=False;");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=ExpenseTrackerDb;Trusted_Connection=True;Encrypt=False;");
         }
     }
 }

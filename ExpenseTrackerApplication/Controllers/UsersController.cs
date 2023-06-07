@@ -22,7 +22,7 @@ namespace ExpenseTrackerApplication.Controllers
         }
 
         [HttpPost("[action]")]
-        //localhost:7145/api/users/register
+        //https://localhost:7145/api/users/register
         public IActionResult Register([FromBody] User user)
         {
             var userExists = _appdb.Users.FirstOrDefault(u => u.Email == user.Email);
@@ -36,7 +36,7 @@ namespace ExpenseTrackerApplication.Controllers
         }
 
         [HttpPost("[action]")]
-        //localhost:7145/api/users/login
+        //https://localhost:7145/api/users/login
         public IActionResult Login([FromBody] User user)
         {
             var currentUser = _appdb.Users.FirstOrDefault(x => x.Email == user.Email && x.Password == user.Password);
