@@ -1,0 +1,12 @@
+.categories {
+  padding: 1rem;
+  background-color: rgb(31, 31, 31); /* Blue color used in macOS */
+  color: white; /* Text color */
+  margin: 2rem auto;
+  width: 50rem;
+  max-width: 95%;
+  border-radius: 12px;
+  text-align: left;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+}
+

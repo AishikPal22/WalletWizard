@@ -1,0 +1,74 @@
+import React, { useState } from 'react';
+import Login from './Login';
+import Register from './Register';
+import Card from './Card';
+import './Main.css';
+import { useNavigate } from 'react-router-dom/dist';
+import "bootstrap/dist/css/bootstrap.min.css";
+
+function Main() {
+  const [user, setUser] = useState(null);
+  const [isLogin, setIsLogin] = useState(true);
+  const navigate = useNavigate();
+
+  const handleLogin = (email, password) => {
+    const userData = {
+      email,
+      password
+    };
+    setUser(userData);
+    navigate('/homemain');
+  };
+
+  const handleRegister = (name, email, phoneNo, password) => {
+    const userData = {
+      name,
+      email,
+      phoneNo,
+      password
+    };
+    setUser(userData);
+    navigate('/');
+    window.location.reload();
+  };
+
+  // const handleLogout = () => {
+  //   setUser(null);
+  // };
+
+  const toggleMode = () => {
+    setIsLogin(!isLogin);
+  };
+
+  return (
+    <div>
+      <Login handleLogin={handleLogin} />
+    </div>
+  );
+}
+
+export default Main;
+
+  // <div className="app-container">
+  //   <div className="centered-card">
+      // <div className='card'>
+      //   <div className="card_expendix">€xpendiX</div>
+      //   <div className="app-container">
+      //     {isLogin ? (
+      //       <div>
+      //         <Login handleLogin={handleLogin} />
+      //         <h4 className="new-user">New user?</h4>
+      //       </div>
+      //     ) : (
+      //       <div>
+      //         <Register handleRegister={handleRegister} />
+      //         <h4 className="new-user">Already have an account?</h4>
+      //       </div>
+      //     )}
+      //     <button className="toggle-button" onClick={toggleMode}> {/* Add the toggle-button class */}
+      //       {isLogin ? 'Register' : 'Login'}
+      //     </button>
+      //   </div>
+      // </div>
+  //   </div>
+  // </div>
