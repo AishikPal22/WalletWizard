@@ -1,0 +1,14 @@
+https://localhost:7145/api/Users/Login
+
+{
+    "email": "ap@gmail.com",
+    "password": "ap01234"
+}
+{
+    "email": "user@gmail.com",
+    "password": "user56789"
+}
+
+https://localhost:7145/api/Categories
+
+https://localhost:7145/api/Home/CurrentBalance

@@ -7,7 +7,7 @@ const Chart = ({ items }) => {
     labels: ['Total Expense', 'Current Balance'],
     datasets: [
       {
-        data: [items[1], (items[0]-items[1])],
+        data: [items.totalExpense, items.totalIncome - items.totalExpense],
         backgroundColor: ['#36A2EB', '#FFCE56'],
         hoverBackgroundColor: ['#36A2EB', '#FFCE56'],
       },

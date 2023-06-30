@@ -10,52 +10,74 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import '../HomePage/Main.css';
 import axios from 'axios'
 
-const DUMMY_CATEGORIES = [
-  {
-    id: 1,
-    title: 'Salary',
-    type: 'Income',
-  },
-  {
-    id: 2,
-    title: 'Sales',
-    type: 'Income',
-  },
-  {
-    id: 3,
-    title: 'Shopping',
-    type: 'Expense',
-  },
-  {
-    id: 4,
-    title: 'Dining',
-    type: 'Expense',
-  },
-  {
-    id: 5,
-    title: 'Travelling',
-    type: 'Expense',
-  },
-];
+// const DUMMY_CATEGORIES = [
+//   {
+//     id: 1,
+//     title: 'Salary',
+//     type: 'Income',
+//   },
+//   {
+//     id: 2,
+//     title: 'Sales',
+//     type: 'Income',
+//   },
+//   {
+//     id: 3,
+//     title: 'Shopping',
+//     type: 'Expense',
+//   },
+//   {
+//     id: 4,
+//     title: 'Dining',
+//     type: 'Expense',
+//   },
+//   {
+//     id: 5,
+//     title: 'Travelling',
+//     type: 'Expense',
+//   },
+// ];
 
 const App = () => {
-  const [categories, setCategories] = useState([]);
   const t=localStorage.getItem('usertoken');
-  useEffect(()=>{
-    const ab= axios.get(`https://localhost:7145/api/Categories`,{
-      headers:{
-        'Authorization':`Bearer ${t}`
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://localhost:7145/api/Categories', {
+          headers: {
+            'Authorization': `Bearer ${t}`
+          }
+        });
+        setCategories(response.data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
       }
-    });
-    setCategories(ab);
-    console.log(ab);
-  });
+    };
+    
+    fetchData();
+  }, [t]);
   
+  console.log(t);
+  console.log(categories);
 
   const addCategoryHandler = (category) => {
-    setCategories((prevCategories) => {
-      return [category, ...prevCategories];
-    });
+    const headers = {
+      'Authorization': `Bearer ${t}`
+    };
+
+    axios.post('https://localhost:7145/api/Categories', category, { headers })
+      .then(response => {
+        console.log('Category added:', response.data);
+        setCategories((prevCategories) => {
+          return [category, ...prevCategories];
+        });
+      })
+      .catch(error => {
+        // Handle the error here
+        console.error('Error adding category:', error);
+      });
   };
 
   return (
@@ -64,15 +86,15 @@ const App = () => {
         <Navbar variant="dark" className="custom-navbar" >
           <Nav className="me-auto">
             {/* <Nav.Link href="#Home" >WalletWizard.com</Nav.Link> */}
-            <NavLink to="/homemain" className="nav nav-link" >WalletWizard.com</NavLink>
+            <NavLink to="/homemain" className="nav nav-link custom-link" >WalletWizard.com</NavLink>
           </Nav>
           <Nav className="ms-auto">
             {/* <Nav.Link href="#Categories" >Categories</Nav.Link> */}
-            <NavLink to="/categories" className="nav nav-link">Categories</NavLink>
+            <NavLink to="/categories" className="nav nav-link custom-link">Categories</NavLink>
             {/* <Nav.Link href="#Transactions" >Transactions</Nav.Link> */}
-            <NavLink to="/transactions" className="nav nav-link">Transactions</NavLink>
+            <NavLink to="/transactions" className="nav nav-link custom-link">Transactions</NavLink>
             {/* <Nav.Link href="#Logout" >Logout</Nav.Link> */}
-            <NavLink to="/" className="nav nav-link">Logout</NavLink>
+            <NavLink to="/" className="nav nav-link custom-link">Logout</NavLink>
           </Nav>
         </Navbar>
       </div>

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Chart from './Chart';
 import './Main.css';
 
@@ -7,23 +8,38 @@ import { NavLink } from "react-router-dom"
 import Navbar from 'react-bootstrap/Navbar';
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const data = [25000.67, 7500.69];
-
-
 function Main() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('usertoken');
+
+    const headers = {
+      'Authorization': `Bearer ${token}`
+    };
+
+    axios.get('https://localhost:7145/api/Home/CurrentBalance', { headers })
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching CurrentBalance:', error);
+      });
+  }, []);
+  
   return (
     <>
       <div>
         <Navbar variant="dark" className="custom-navbar">
           <Nav className="me-auto">
-            <NavLink to="/homemain" className="nav nav-link" >WalletWizard.com</NavLink>
+            <NavLink to="/homemain" className="nav nav-link  custom-link" >WalletWizard.com</NavLink>
           </Nav>
           <Nav className="ms-auto">
             {/* <Nav.Link href="#Categories" >Categories</Nav.Link> */}
-            <NavLink to="/categories" className="nav nav-link">Categories</NavLink>
+            <NavLink to="/categories" className="nav nav-link  custom-link">Categories</NavLink>
             {/* <Nav.Link href="#Transactions" >Transactions</Nav.Link> */}
-            <NavLink to="/transactions" className="nav nav-link">Transactions</NavLink>
-            <NavLink to="/" className="nav nav-link">Logout</NavLink>
+            <NavLink to="/transactions" className="nav nav-link  custom-link">Transactions</NavLink>
+            <NavLink to="/" className="nav nav-link  custom-link">Logout</NavLink>
           </Nav>
         </Navbar>
       </div>
@@ -35,15 +51,15 @@ function Main() {
               <h1 className='label'>Account Status:</h1>
               <div className='item'>
                 <h4 className="label">Total Income</h4>
-                <h2 className="amount">₹{data[0]}</h2>
+                <h2 className="amount">₹{data.totalIncome}</h2>
               </div>
               <div className='item'>
                 <h4 className="label">Total Expense</h4>
-                <h2 className="amount">₹{data[1]}</h2>
+                <h2 className="amount">₹{data.totalExpense}</h2>
               </div>
               <div className='item'>
                 <h4 className="label">Current Balance</h4>
-                <h2 className="amount">₹{data[0] - data[1]}</h2>
+                <h2 className="amount">₹{data.totalIncome - data.totalExpense}</h2>
               </div>
             </div>
           </div>

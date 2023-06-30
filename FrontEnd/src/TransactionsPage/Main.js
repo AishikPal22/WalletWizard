@@ -92,15 +92,15 @@ const App = () => {
         <Navbar variant="dark" className="custom-navbar">
           <Nav className="me-auto">
             {/* <Nav.Link href="#Home" >WalletWizard.com</Nav.Link> */}
-            <NavLink to="/homemain" className="nav nav-link" >WalletWizard.com</NavLink>
+            <NavLink to="/homemain" className="nav nav-link custom-link" >WalletWizard.com</NavLink>
           </Nav>
           <Nav className="ms-auto">
             {/* <Nav.Link href="#Categories" >Categories</Nav.Link> */}
-            <NavLink to="/categories" className="nav nav-link">Categories</NavLink>
+            <NavLink to="/categories" className="nav nav-link custom-link">Categories</NavLink>
             {/* <Nav.Link href="#Transactions" >Transactions</Nav.Link> */}
-            <NavLink to="/transactions" className="nav nav-link">Transactions</NavLink>
+            <NavLink to="/transactions" className="nav nav-link custom-link">Transactions</NavLink>
             {/* <Nav.Link href="#Logout" >Logout</Nav.Link> */}
-            <NavLink to="/" className="nav nav-link">Logout</NavLink>
+            <NavLink to="/" className="nav nav-link custom-link">Logout</NavLink>
           </Nav>
         </Navbar>
       </div>

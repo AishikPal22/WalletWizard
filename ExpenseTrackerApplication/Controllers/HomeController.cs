@@ -41,9 +41,9 @@ namespace ExpenseTrackerApplication.Controllers
                     .Sum(j => j.Amount);
 
                 //Current Balance
-                int Balance = TotalIncome - TotalExpense;
+                //int Balance = TotalIncome - TotalExpense;
 
-                return Ok(new { totalIncome = TotalIncome, totalExpense = TotalExpense, currentBalance = Balance });
+                return Ok(new { totalIncome = TotalIncome, totalExpense = TotalExpense});
             }
         }
     }

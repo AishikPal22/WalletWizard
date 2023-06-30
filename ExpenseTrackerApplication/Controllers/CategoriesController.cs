@@ -21,17 +21,16 @@ namespace ExpenseTrackerApplication.Controllers
         {
             var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             var user = _appdb.Users.FirstOrDefault(u => u.Email == userEmail);
+
             if (user == null)
                 return NotFound();
-            else
-            {
-                var items = _appdb.Categories.Select(c => new { c.Id, c.Title, type = c.Type.ToLower() });
-                return Ok(items);
-            }
+
+            var items = _appdb.Categories.Select(c => new { c.Id, c.Title, type = c.Type.ToLower() });
+            return Ok(items);
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         //https://localhost:7145/api/categories
         public IActionResult Post([FromBody] Category category)
         {
