@@ -5,7 +5,7 @@ import './EditForm.css';
 const EditForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState(props.expense.title);
   const [enteredAmount, setEnteredAmount] = useState(props.expense.amount);
-  const [enteredCategory, setEnteredCategory] = useState(props.expense.category);
+  const [enteredCategory, setEnteredCategory] = useState(props.expense.categoryName);
   const [enteredDate, setEnteredDate] = useState(props.expense.date);
 
   const minDate = '2023-04-01';
@@ -35,13 +35,18 @@ const EditForm = (props) => {
     }
 
     const expenseData = {
+      id: props.expense.id,
       title: enteredTitle,
       amount: enteredAmount,
-      category: enteredCategory,
+      categoryName: enteredCategory,
       date: new Date(enteredDate),
     };
 
     props.onSaveExpense(expenseData);
+    setEnteredTitle('');
+    setEnteredAmount('');
+    setEnteredCategory('');
+    setEnteredDate('');
   };
 
   const cancelHandler = () => {
@@ -81,11 +86,16 @@ const EditForm = (props) => {
         </div>
         <div className='edit__control'>
           <label>Category</label>
-          <select className='category-select' value={enteredCategory} onChange={categoryChangeHandler}>
+          {/* <select className='category-select' value={enteredCategory} onChange={categoryChangeHandler}>
             <option value=''>Select Category</option>
             <option value='Income'>Income</option>
             <option value='Expense'>Expense</option>
-          </select>
+          </select> */}
+          <input
+            type='text'
+            value={enteredCategory}
+            onChange={categoryChangeHandler}
+          />
         </div>
       </div>
       <div className='edit__actions'>

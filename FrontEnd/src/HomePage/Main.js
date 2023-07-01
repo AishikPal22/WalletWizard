@@ -4,12 +4,15 @@ import Chart from './Chart';
 import './Main.css';
 
 import Nav from 'react-bootstrap/Nav';
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
+import { Modal, Button } from 'react-bootstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Main() {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('usertoken');
@@ -26,6 +29,23 @@ function Main() {
         console.error('Error fetching CurrentBalance:', error);
       });
   }, []);
+
+  const handleLogout = () => {
+    // Clear the token from localStorage or wherever it is stored
+    localStorage.removeItem('usertoken');
+    setShowLogoutModal(false);
+    // window.location.reload();
+    // Redirect the user to the login or home page
+    navigate('/');
+  };
+
+  const handleLogoutConfirmation = () => {
+    setShowLogoutModal(true);
+  };
+
+  const handleLogoutCancel = () => {
+    setShowLogoutModal(false);
+  };
   
   return (
     <>
@@ -39,10 +59,25 @@ function Main() {
             <NavLink to="/categories" className="nav nav-link  custom-link">Categories</NavLink>
             {/* <Nav.Link href="#Transactions" >Transactions</Nav.Link> */}
             <NavLink to="/transactions" className="nav nav-link  custom-link">Transactions</NavLink>
-            <NavLink to="/" className="nav nav-link  custom-link">Logout</NavLink>
+            {/* <NavLink to="/" className="nav nav-link  custom-link" onClick={logoutHandler}>Logout</NavLink> */}
+            <Nav.Link onClick={handleLogoutConfirmation}>Logout</Nav.Link>
           </Nav>
         </Navbar>
       </div>
+      <Modal show={showLogoutModal} onHide={handleLogoutCancel}>
+        <Modal.Header closeButton>
+          <Modal.Title>Logout Confirmation</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to logout?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleLogoutCancel}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleLogout}>
+            Logout
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <style>{'body { background-color: #3f3f3f; }'}</style>
       <div className='main_row'>
         <div className="data-container">

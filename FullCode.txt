@@ -1,0 +1,465 @@
+EditForm.js:
+
+import React, { useState } from 'react';
+
+import './EditForm.css';
+
+const EditForm = (props) => {
+  const [enteredTitle, setEnteredTitle] = useState(props.expense.title);
+  const [enteredAmount, setEnteredAmount] = useState(props.expense.amount);
+  const [enteredCategory, setEnteredCategory] = useState(props.expense.categoryName);
+  const [enteredDate, setEnteredDate] = useState(props.expense.date);
+
+  const minDate = '2023-04-01';
+  const maxDate = '2024-03-31';
+  
+  const titleChangeHandler = (event) => {
+    setEnteredTitle(event.target.value);
+  };
+
+  const amountChangeHandler = (event) => {
+    setEnteredAmount(event.target.value);
+  };
+
+  const categoryChangeHandler = (event) => {
+    setEnteredCategory(event.target.value);
+  };
+
+  const dateChangeHandler = (event) => {
+    setEnteredDate(event.target.value);
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    if (!enteredCategory|| enteredCategory === '') {
+      return;
+    }
+
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      categoryName: enteredCategory,
+      date: new Date(enteredDate),
+    };
+
+    props.onSaveExpense(expenseData);
+    setEnteredTitle('');
+    setEnteredAmount('');
+    setEnteredCategory('');
+    setEnteredDate('');
+  };
+
+  const cancelHandler = () => {
+    props.onCancel();
+  };
+
+  return (
+    <form onSubmit={submitHandler}>
+      <div className='edit__controls'>
+        <div className='edit__control'>
+          <label>Title</label>
+          <input
+            type='text'
+            value={enteredTitle}
+            onChange={titleChangeHandler}
+          />
+        </div>
+        <div className='edit__control'>
+          <label>Amount</label>
+          <input
+            type='number'
+            min='0.01'
+            step='0.01'
+            value={enteredAmount}
+            onChange={amountChangeHandler}
+          />
+        </div>
+        <div className='edit__control'>
+          <label>Date</label>
+          <input
+            type='date'
+            min={minDate}
+            max={maxDate}
+            value={enteredDate}
+            onChange={dateChangeHandler}
+          />
+        </div>
+        <div className='edit__control'>
+          <label>Category</label>
+          {/* <select className='category-select' value={enteredCategory} onChange={categoryChangeHandler}>
+            <option value=''>Select Category</option>
+            <option value='Income'>Income</option>
+            <option value='Expense'>Expense</option>
+          </select> */}
+          <input
+            type='text'
+            value={enteredCategory}
+            onChange={categoryChangeHandler}
+          />
+        </div>
+      </div>
+      <div className='edit__actions'>
+        <button type="button" onClick={cancelHandler}>Cancel</button>
+        <button type='submit'>Done</button>
+      </div>
+    </form>
+  );
+};
+
+export default EditForm;
+----------------------
+
+ExpenseItem.js:
+
+import React, { useState } from 'react';
+import ExpenseDate from './ExpenseDate';
+import './ExpenseItem.css';
+import EditForm from '../EditExpense/EditForm';
+
+const ExpenseItem = (props) => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const startEditingHandler = () => {
+    setIsEditing(true);
+  };
+
+  const stopEditingHandler = () => {
+    setIsEditing(false);
+  };
+
+  const saveExpenseHandler = (updatedExpenseData) => {
+    const updatedExpense = { ...props.expense, ...updatedExpenseData };
+    props.onSaveExpense(updatedExpense);
+    console.log(updatedExpense);
+    stopEditingHandler();
+  };
+
+  const deleteExpenseHandler = () => {
+    props.onDeleteExpense(props.expense.id);
+  };
+
+  // const updateExpenseHandler = (updatedExpense) => {
+  //   props.onSaveExpense(updatedExpense);
+  // };
+  
+
+  return (
+    <li>
+      {!isEditing && (
+        <div className='expense-item'>
+          <ExpenseDate date={props.expense.date} />
+          <div className='expense-item__description'>
+            <h2>{props.expense.title}</h2>
+            <div className='expense-item__price'>₹ {props.expense.amount}</div>
+            <div className='expense-item__category'>{props.expense.categoryName}</div>
+            <div className='expense-item__type'>{props.expense.categoryType}</div>
+          </div>
+          <div className='expense-item__actions'>
+            <button className='expense-item__edit' onClick={startEditingHandler}>Edit</button>
+          </div>
+          <div className='expense-item__actions'>
+            <button className='expense-item__delete' onClick={deleteExpenseHandler}>Delete</button>
+          </div>
+        </div>
+      )}
+      {isEditing && (
+        <EditForm
+          expense={props.expense}
+          onSaveExpense={saveExpenseHandler}
+          onCancel={stopEditingHandler}
+        />
+      )}
+    </li>
+  );
+};
+
+export default ExpenseItem;
+
+-----------------------------------------------
+
+ExpensesList.js:
+
+import React from 'react';
+
+import ExpenseItem from './ExpenseItem';
+import './ExpensesList.css';
+
+const ExpensesList = (props) => {
+  if (props.items.length === 0) {
+    return <h2 className='expenses-list__fallback'>Found no expenses.</h2>;
+  }
+
+  const saveExpenseHandler = (updatedExpense) => {
+    console.log(updatedExpense);
+    props.onSaveExpense(updatedExpense);
+  };
+
+  return (
+    <ul className='expenses-list'>
+      {props.items.map((expense) => (
+        <ExpenseItem
+          key={expense.id}
+          expense={expense}
+          onSaveExpense={saveExpenseHandler}
+          onDeleteExpense={props.onDeleteExpense}
+        />
+      ))}
+    </ul>
+  );
+};
+
+export default ExpensesList;
+
+-------------------------------------
+
+Expenses.js:
+
+import React, { useState, useEffect } from 'react';
+import ExpensesFilter from './ExpensesFilter';
+import ExpensesList from './ExpensesList';
+import ExpensesSplineChart from '../Chart/ExpensesSplineChart';
+import ExpensesBarChart from '../Chart/ExpensesBarChart';
+import './Expenses.css';
+
+const Expenses = (props) => {
+  const [filteredMonth, setFilteredMonth] = useState('');
+
+  const filterChangeHandler = (selectedMonth) => {
+    setFilteredMonth(selectedMonth);
+  };
+
+  useEffect(() => {
+    setFilteredMonth('');
+  }, [props.items]);
+
+  const filteredExpenses = props.items.filter((expense) => {
+    if (filteredMonth === '') {
+      return true;
+    } else {
+      // return (
+      //   expense.date.toLocaleString('en-US', { month: 'long' }) === filteredMonth
+      // );
+      const dateObject = new Date(expense.date);
+      const month = dateObject.toLocaleString('en-US', { month: 'long' });
+      return month === filteredMonth;
+    }
+  });
+
+  const updateExpenseHandler = (updatedExpense) => {
+    const updatedExpenses = props.items.map((expense) => {
+      console.log(expense);
+      if (expense.id === updatedExpense.id) {
+        return {
+          ...expense,
+          ...updatedExpense,
+        };
+      }
+      console.log(updatedExpense);
+      return expense;
+    });
+  
+    console.log(updatedExpenses);
+    props.onUpdateExpense(updatedExpenses);
+  };
+
+  const deleteExpenseHandler = (expenseId) => {
+    props.onDeleteExpense(expenseId);
+  };
+  
+  return (
+    <div>
+      <div className='expenses'>
+        {/* <div className='graph-container'>
+          <ExpensesSplineChart expenses={props.items} />
+        </div> */}
+        <div className='graph-container'>
+          <ExpensesBarChart expenses={props.items} />
+        </div>
+        <ExpensesFilter
+          selected={filteredMonth}
+          onChangeFilter={filterChangeHandler}
+        />
+        <ExpensesList
+          items={filteredExpenses}
+          onSaveExpense={updateExpenseHandler}
+          onDeleteExpense={deleteExpenseHandler}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Expenses;
+
+--------------------------------------------------------
+
+Main.js:
+
+import React, { useEffect, useState } from 'react';
+
+import NewExpense from './NewExpense/NewExpense';
+import Expenses from './Expenses/Expenses';
+
+import Nav from 'react-bootstrap/Nav';
+import { NavLink, useNavigate } from "react-router-dom"
+import Navbar from 'react-bootstrap/Navbar';
+import { Modal, Button } from 'react-bootstrap';
+import "bootstrap/dist/css/bootstrap.min.css";
+import '../HomePage/Main.css';
+import axios from 'axios';
+
+const App = () => {
+  const t=localStorage.getItem('usertoken');
+  const [expenses, setExpenses] = useState([]);
+  const navigate = useNavigate();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://localhost:7145/api/Transactions/SortByDate', {
+          headers: {
+            'Authorization': `Bearer ${t}`
+          }
+        });
+        console.log(response.data);
+        setExpenses(response.data);
+      } catch (error) {
+        console.error('Error fetching transactions:', error);
+      }
+    };
+    fetchData();
+  }, [t]);
+
+
+
+  const addExpenseHandler = (expense) => {
+    const headers = {
+      'Authorization': `Bearer ${t}`
+    };
+
+    axios.post('https://localhost:7145/api/Transactions', expense, { headers })
+      .then(response => {
+        console.log('Expense added:', response.data);
+        setExpenses((prevExpenses) => {
+          return [expense, ...prevExpenses];
+        });
+      })
+      .catch(error => {
+        // Handle the error here
+        console.error('Error adding expense:', error);
+      });
+      // console.log(response.data);
+  };
+
+
+  const updateExpenseHandler = (updatedExpense) => {
+   const headers = {
+      'Authorization': `Bearer ${t}`
+    };
+  
+    axios.put(`https://localhost:7145/api/Transactions/${updatedExpense.id}`, updatedExpense, { headers })
+      .then(response => {
+        setExpenses((prevExpenses) => {
+          const updatedExpenses = prevExpenses.map((expense) => {
+            if (expense.id === updatedExpense.id) {
+              return {
+                ...expense,
+                ...updatedExpense,
+              };
+            }
+            return expense;
+          });
+          return updatedExpenses;
+        });
+      })
+      .catch(error => {
+        console.error('Error updating expense:', error);
+      });
+  };
+
+
+  const deleteExpenseHandler = (expenseId) => {
+    axios.delete(`https://localhost:7145/api/Transactions/${expenseId}`, {
+      headers: {
+        'Authorization': `Bearer ${t}`
+      }
+    })
+      .then((response) => {
+        setExpenses((prevExpenses) => {
+          const updatedExpenses = prevExpenses.filter(
+            (expense) => expense.id !== expenseId
+            );
+            return updatedExpenses;
+          });
+        })
+        .catch((error) => {
+          console.error('Error deleting expense:', error);
+        });
+        // console.log(response.data);
+  };
+
+  const handleLogout = () => {
+    // Clear the token from localStorage or wherever it is stored
+    localStorage.removeItem('usertoken');
+    setShowLogoutModal(false);
+    // window.location.reload();
+    // Redirect the user to the login or home page
+    navigate('/');
+  };
+
+  const handleLogoutConfirmation = () => {
+    setShowLogoutModal(true);
+  };
+
+  const handleLogoutCancel = () => {
+    setShowLogoutModal(false);
+  };
+  
+  return (
+    <>
+      <div>
+        <Navbar variant="dark" className="custom-navbar">
+          <Nav className="me-auto">
+            {/* <Nav.Link href="#Home" >WalletWizard.com</Nav.Link> */}
+            <NavLink to="/homemain" className="nav nav-link custom-link" >WalletWizard.com</NavLink>
+          </Nav>
+          <Nav className="ms-auto">
+            {/* <Nav.Link href="#Categories" >Categories</Nav.Link> */}
+            <NavLink to="/categories" className="nav nav-link custom-link">Categories</NavLink>
+            {/* <Nav.Link href="#Transactions" >Transactions</Nav.Link> */}
+            <NavLink to="/transactions" className="nav nav-link custom-link">Transactions</NavLink>
+            {/* <Nav.Link href="#Logout" >Logout</Nav.Link> */}
+            {/* <NavLink to="/" className="nav nav-link custom-link" onClick={logoutHandler}>Logout</NavLink> */}
+            <Nav.Link onClick={handleLogoutConfirmation}>Logout</Nav.Link>
+          </Nav>
+        </Navbar>
+      </div>
+      <Modal show={showLogoutModal} onHide={handleLogoutCancel}>
+        <Modal.Header closeButton>
+          <Modal.Title>Logout Confirmation</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to logout?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleLogoutCancel}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleLogout}>
+            Logout
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <div>
+        <style>{'body { background-color: #3f3f3f; }'}</style>
+        <NewExpense onAddExpense={addExpenseHandler} />
+        <Expenses items={expenses} onUpdateExpense={updateExpenseHandler} onDeleteExpense={deleteExpenseHandler}/>      
+      </div>
+    </>
+  );
+};
+
+export default App;
+
+---------------------------------------------
+

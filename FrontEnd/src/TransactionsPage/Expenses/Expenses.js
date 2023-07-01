@@ -31,17 +31,20 @@ const Expenses = (props) => {
 
   const updateExpenseHandler = (updatedExpense) => {
     const updatedExpenses = props.items.map((expense) => {
+      console.log(expense);
       if (expense.id === updatedExpense.id) {
         return {
           ...expense,
           ...updatedExpense,
         };
       }
+      console.log(updatedExpense);
+      console.log(expense);
       return expense;
     });
   
     console.log(updatedExpenses);
-    props.onUpdateExpense(updatedExpenses);
+    props.onUpdateExpense(updatedExpense);
   };
 
   const deleteExpenseHandler = (expenseId) => {

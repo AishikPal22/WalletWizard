@@ -17,10 +17,6 @@ const ExpenseDate = (props) => {
   const day = dateObject.getDate();
   const year = dateObject.getFullYear();
 
-  console.log(year); // Output: 2023
-  console.log(month); // Output: 5
-  console.log(day); // Output: 22
-
 
   return (
     <div className='expense-date'>

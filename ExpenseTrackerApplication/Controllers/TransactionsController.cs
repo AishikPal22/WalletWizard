@@ -44,7 +44,7 @@ namespace ExpenseTrackerApplication.Controllers
             var user = _appdb.Users.FirstOrDefault(u => u.Email == userEmail);
 
             var transactions = _appdb.Transactions
-                .Where(c => c.UserId == user.Id).OrderBy(x => x.Date)
+                .Where(c => c.UserId == user.Id).OrderByDescending(x => x.Date)
                 .Select(t => new TransactionDTO(t.Id, t.Date, t.Note, t.Category.Title, t.Category.Type, t.Amount));
 
             if (transactions == null)
@@ -86,7 +86,7 @@ namespace ExpenseTrackerApplication.Controllers
         [HttpPut("{id}")]
         [Authorize]
         //https://localhost:7145/api/transactions/0
-        public IActionResult Put(int id, [FromBody] Transaction transaction)
+        public IActionResult Put(int id, [FromBody] GenericDTO transactiondto)
         {
             var transactionToEdit = _appdb.Transactions.FirstOrDefault(p => p.Id == id);
             if (transactionToEdit == null) { return NoContent(); }
@@ -95,18 +95,19 @@ namespace ExpenseTrackerApplication.Controllers
                 var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
                 var user = _appdb.Users.FirstOrDefault(u => u.Email == userEmail);
                 if (user == null) { return NotFound(); }
-                if (transactionToEdit.UserId == user.Id)
-                {
-                    transactionToEdit.CategoryId = transaction.CategoryId;
-                    transactionToEdit.Amount = transaction.Amount;
-                    transactionToEdit.Note = transaction.Note;
-                    transactionToEdit.Date = transaction.Date;
-                    //property.IsTrending = false;
-                    transaction.UserId = user.Id;
-                    _appdb.SaveChanges();
-                    return Ok("Record updated successfully!");
-                }
-                return BadRequest();
+
+                var category = _appdb.Categories.FirstOrDefault(c => c.Title == transactiondto.CategoryName);
+                if (category == null)
+                    return NotFound();
+
+                transactionToEdit.CategoryId = category.Id;
+                transactionToEdit.Amount = transactiondto.Amount;
+                transactionToEdit.Note = transactiondto.Title;
+                transactionToEdit.Date = transactiondto.Date;
+                //property.IsTrending = false;
+                //transaction.UserId = user.Id;
+                _appdb.SaveChanges();
+                return Ok("Record updated successfully!");
             }
         }
 

@@ -14,10 +14,10 @@ const ExpenseItem = (props) => {
     setIsEditing(false);
   };
 
-  const saveExpenseHandler = (updatedExpenseData) => {
-    const updatedExpense = { ...props.expense, ...updatedExpenseData };
-    props.onSaveExpense(updatedExpense);
-    console.log(updatedExpense);
+  const saveExpenseHandler = (updatedExpense) => {
+    const updatedExpenseData = { ...props.expense, ...updatedExpense };
+    props.onSaveExpense(updatedExpenseData);
+    console.log(updatedExpenseData);
     stopEditingHandler();
   };
 
@@ -28,6 +28,8 @@ const ExpenseItem = (props) => {
   // const updateExpenseHandler = (updatedExpense) => {
   //   props.onSaveExpense(updatedExpense);
   // };
+
+  console.log(props);
   
 
   return (

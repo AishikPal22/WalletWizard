@@ -9,24 +9,33 @@ const Login = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const userData = {
       email,
       password
     };
     setUser(userData);
-    axios.post(`https://localhost:7145/api/Users/Login`,userData
-    ).then((res)=>{
-      console.log(res);
-      // alert("Successfully logged in!");
-      localStorage.setItem('usertoken',res.data);
-    }).catch((error)=>
-    {
+    // axios.post(`https://localhost:7145/api/Users/Login`,userData
+    // ).then((res)=>{
+    //   console.log(res);
+    //   // alert("Successfully logged in!");
+    //   localStorage.setItem('usertoken',res.data);
+    // }).catch((error)=>
+    // {
+    //   console.log(error);
+    //   alert("Check email id or password and try again.");
+    // });
+    // navigate('/homemain');
+    try {
+      const response = await axios.post(`https://localhost:7145/api/Users/Login`, userData);
+      console.log(response);
+      localStorage.setItem('usertoken', response.data);
+      navigate('/homemain');
+    } catch (error) {
       console.log(error);
-      alert("Check email id or password and try again.");
-    });
-    navigate('/homemain');
+      alert('Check email id or password and try again.');
+    }
   };
 
 
