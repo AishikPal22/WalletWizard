@@ -20,9 +20,12 @@ const Expenses = (props) => {
     if (filteredMonth === '') {
       return true;
     } else {
-      return (
-        expense.date.toLocaleString('en-US', { month: 'long' }) === filteredMonth
-      );
+      // return (
+      //   expense.date.toLocaleString('en-US', { month: 'long' }) === filteredMonth
+      // );
+      const dateObject = new Date(expense.date);
+      const month = dateObject.toLocaleString('en-US', { month: 'long' });
+      return month === filteredMonth;
     }
   });
 

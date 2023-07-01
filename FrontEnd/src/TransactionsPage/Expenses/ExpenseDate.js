@@ -6,10 +6,21 @@ const ExpenseDate = (props) => {
   if (!props.date) {
     return null; // Return null or handle the case where date is undefined
   }
-  
-  const month = props.date.toLocaleString('en-US', { month: 'long' });
-  const day = props.date.toLocaleString('en-US', { day: '2-digit' });
-  const year = props.date.getFullYear();
+
+  // const month = props.date.toLocaleString('en-US', { month: 'long' });
+  // const day = props.date.toLocaleString('en-US', { day: '2-digit' });
+  // const year = props.date.getFullYear();
+
+  const dateString = props.date; // Assuming props.date is '2023-05-22T00:00:00'
+  const dateObject = new Date(dateString);
+  const month = dateObject.toLocaleString('en-US', { month: 'long' }); // Months are zero-based, so we add 1
+  const day = dateObject.getDate();
+  const year = dateObject.getFullYear();
+
+  console.log(year); // Output: 2023
+  console.log(month); // Output: 5
+  console.log(day); // Output: 22
+
 
   return (
     <div className='expense-date'>

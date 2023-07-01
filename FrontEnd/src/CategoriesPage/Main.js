@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom"
 import Navbar from 'react-bootstrap/Navbar';
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../HomePage/Main.css';
-import axios from 'axios'
+import axios from 'axios';
 
 // const DUMMY_CATEGORIES = [
 //   {
@@ -54,8 +54,7 @@ const App = () => {
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
-    };
-    
+    };   
     fetchData();
   }, [t]);
   

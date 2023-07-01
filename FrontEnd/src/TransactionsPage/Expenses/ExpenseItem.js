@@ -38,7 +38,8 @@ const ExpenseItem = (props) => {
           <div className='expense-item__description'>
             <h2>{props.expense.title}</h2>
             <div className='expense-item__price'>₹ {props.expense.amount}</div>
-            <div className='expense-item__category'>{props.expense.category}</div>
+            <div className='expense-item__category'>{props.expense.categoryName}</div>
+            <div className='expense-item__type'>{props.expense.categoryType}</div>
           </div>
           <div className='expense-item__actions'>
             <button className='expense-item__edit' onClick={startEditingHandler}>Edit</button>

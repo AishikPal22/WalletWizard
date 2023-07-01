@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import NewExpense from './NewExpense/NewExpense';
 import Expenses from './Expenses/Expenses';
 
@@ -7,45 +8,82 @@ import { NavLink } from "react-router-dom"
 import Navbar from 'react-bootstrap/Navbar';
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../HomePage/Main.css';
+import axios from 'axios';
 
-const DUMMY_EXPENSES = [
-  {
-    id: 1,
-    title: 'Toilet Paper',
-    category: 'Expense',
-    amount: 94.12,
-    date: new Date(2023, 7, 14),
-  },
-  {
-    id: 2,
-    title: 'New TV',
-    category: 'Expense',
-    amount: 799.49,
-    date: new Date(2024, 2, 12),
-  },
-  {
-    id: 3,
-    title: 'Salary',
-    category: 'Income',
-    amount: 3294.67,
-    date: new Date(2024, 2, 28),
-  },
-  {
-    id: 4,
-    title: 'New Desk (Wooden)',
-    category: 'Expense',
-    amount: 450,
-    date: new Date(2023, 5, 12),
-  },
-];
+// const DUMMY_EXPENSES = [
+//   {
+//     id: 1,
+//     title: 'Toilet Paper',
+//     category: 'Expense',
+//     amount: 94.12,
+//     date: new Date(2023, 7, 14),
+//   },
+//   {
+//     id: 2,
+//     title: 'New TV',
+//     category: 'Expense',
+//     amount: 799.49,
+//     date: new Date(2024, 2, 12),
+//   },
+//   {
+//     id: 3,
+//     title: 'Salary',
+//     category: 'Income',
+//     amount: 3294.67,
+//     date: new Date(2024, 2, 28),
+//   },
+//   {
+//     id: 4,
+//     title: 'New Desk (Wooden)',
+//     category: 'Expense',
+//     amount: 450,
+//     date: new Date(2023, 5, 12),
+//   },
+// ];
 
 const App = () => {
-  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+  const t=localStorage.getItem('usertoken');
+  const [expenses, setExpenses] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://localhost:7145/api/Transactions/MyTransactions', {
+          headers: {
+            'Authorization': `Bearer ${t}`
+          }
+        });
+        console.log(response.data);
+        setExpenses(response.data);
+      } catch (error) {
+        console.error('Error fetching transactions:', error);
+      }
+    };
+    fetchData();
+  }, [t]);
+
+  // const addExpenseHandler = (expense) => {
+  //   setExpenses((prevExpenses) => {
+  //     return [expense, ...prevExpenses];
+  //   });
+  // };
 
   const addExpenseHandler = (expense) => {
-    setExpenses((prevExpenses) => {
-      return [expense, ...prevExpenses];
-    });
+    const headers = {
+      'Authorization': `Bearer ${t}`
+    };
+
+    axios.post('https://localhost:7145/api/Transactions', expense, { headers })
+      .then(response => {
+        console.log('Expense added:', response.data);
+        setExpenses((prevExpenses) => {
+          return [expense, ...prevExpenses];
+        });
+      })
+      .catch(error => {
+        // Handle the error here
+        console.error('Error adding expense:', error);
+      });
   };
 
   const updateExpenseHandler = (updatedExpense) => {

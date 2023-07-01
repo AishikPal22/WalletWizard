@@ -21,10 +21,14 @@ const ExpenseForm = (props) => {
     setEnteredAmount(event.target.value);
   };
 
-  const dropdownChangeHandler = (event) => {
+  const categoryChangeHandler = (event) => {
     setEnteredCategory(event.target.value);
-    console.log(event.target.value);
   };
+
+  // const dropdownChangeHandler = (event) => {
+  //   setEnteredCategory(event.target.value);
+  //   console.log(event.target.value);
+  // };
 
   const dateChangeHandler = (event) => {
     setEnteredDate(event.target.value);
@@ -40,7 +44,7 @@ const ExpenseForm = (props) => {
     const expenseData = {
       title: enteredTitle,
       amount: enteredAmount,
-      category: enteredCategory,
+      categoryName: enteredCategory,
       date: new Date(enteredDate),
     };
     //console.log(expenseData);
@@ -85,11 +89,16 @@ const ExpenseForm = (props) => {
         </div>
         <div className='new-expense__control'>
           <label>Category</label>
-          <select className='category-select' value={enteredCategory} onChange={dropdownChangeHandler}>
+          {/* <select className='category-select' value={enteredCategory} onChange={dropdownChangeHandler}>
             <option value=''>Select Category</option>
             <option value='Income'>Income</option>
             <option value='Expense'>Expense</option>
-          </select>
+          </select> */}
+          <input
+            type='text'
+            value={enteredCategory}
+            onChange={categoryChangeHandler}
+          />
         </div>
       </div>
       <div className='new-expense__actions'>

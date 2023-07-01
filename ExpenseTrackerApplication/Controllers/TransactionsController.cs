@@ -25,8 +25,9 @@ namespace ExpenseTrackerApplication.Controllers
             var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             var user = _appdb.Users.FirstOrDefault(u => u.Email == userEmail);
 
-            var transactions = _appdb.Transactions.Where(c => c.UserId == user.Id).Select(
-                    t => new TransactionDTO(t.Category.Title, t.Category.Type.ToLower(), t.Amount, t.Note, t.Date.ToString("D")));
+            var transactions = _appdb.Transactions
+                .Where(c => c.UserId == user.Id)
+                .Select(t => new TransactionDTO(t.Id, t.Date, t.Note, t.Category.Title, t.Category.Type, t.Amount));
 
             if (transactions == null)
                 return BadRequest();
@@ -42,8 +43,9 @@ namespace ExpenseTrackerApplication.Controllers
             var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             var user = _appdb.Users.FirstOrDefault(u => u.Email == userEmail);
 
-            var transactions = _appdb.Transactions.Where(c => c.UserId == user.Id).OrderBy(x => x.Date).Select(
-                    t => new TransactionDTO(t.Category.Title, t.Category.Type.ToLower(), t.Amount, t.Note, t.Date.ToString("D")));
+            var transactions = _appdb.Transactions
+                .Where(c => c.UserId == user.Id).OrderBy(x => x.Date)
+                .Select(t => new TransactionDTO(t.Id, t.Date, t.Note, t.Category.Title, t.Category.Type, t.Amount));
 
             if (transactions == null)
                 return BadRequest();
@@ -51,77 +53,30 @@ namespace ExpenseTrackerApplication.Controllers
                 return Ok(transactions);
         }
 
-        [HttpGet("CategoryId/{id}")]
-        [Authorize]
-        //https://localhost:7145/api/transactions/usertransactionsbycategory?categoryid=0
-        public IActionResult GetTransactionsByCategory(string id)
-        {
-            var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            var user = _appdb.Users.FirstOrDefault(u => u.Email == userEmail);
-
-            int categoryId = int.Parse(id);
-            var transactions = _appdb.Transactions.Where(x => x.UserId == user.Id && x.CategoryId == categoryId).Select(
-                        t => new TransactionDTO(t.Category.Title, t.Category.Type.ToLower(), t.Amount, t.Note, t.Date.ToString("D")));
-
-            if (transactions.IsNullOrEmpty())
-                return NotFound();
-            else
-                return Ok(transactions);
-        }
-
-        [HttpGet("Date/{day}")]
-        [Authorize]
-        //https://localhost:7145/api/transactions/usertransactionsbydate?date=yyyy-MM-dd
-        public IActionResult GetTransactionsByDate(string day)
-        {
-            var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            var user = _appdb.Users.FirstOrDefault(u => u.Email == userEmail);
-
-            DateTime date = DateTime.Parse(day);
-            var transactions = _appdb.Transactions.Where(x => x.UserId == user.Id && x.Date == date).Select(
-                        t => new TransactionDTO(t.Category.Title, t.Category.Type.ToLower(), t.Amount, t.Note, t.Date.ToString("D")));
-
-            if (transactions.IsNullOrEmpty())
-                return NotFound();
-            else
-                return Ok(transactions);
-        }
-
-        [HttpGet("{id}")]
-        [Authorize]
-        //https://localhost:7145/api/transactions/usertransactiondetails?id=0
-        public IActionResult GetTransactionDetail(int id)
-        {
-            var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            var user = _appdb.Users.FirstOrDefault(u => u.Email == userEmail);
-
-            var transaction = _appdb.Transactions.FirstOrDefault(c => c.Id == id && c.UserId == user.Id);
-            
-            if(transaction == null) 
-                return BadRequest();
-
-            var transactiondto = _appdb.Transactions.Where(x => x.Id == transaction.Id).Select(
-                        t => new TransactionDTO(t.Category.Title, t.Category.Type.ToLower(), t.Amount, t.Note, t.Date.ToString("D")));
-
-            if (transactiondto.IsNullOrEmpty())
-                return NotFound();
-            else
-                return Ok(transactiondto);
-        }
-
         [HttpPost]
         [Authorize]
         //https://localhost:7145/api/transactions
-        public IActionResult Post([FromBody] Transaction transaction)
+        public IActionResult Post([FromBody] GenericDTO transactiondto)
         {
-            if (transaction == null) { return NoContent(); }
+            if (transactiondto == null) { return NoContent(); }
             else
             {
                 var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
                 var user = _appdb.Users.FirstOrDefault(u => u.Email == userEmail);
                 if (user == null) { return NotFound(); }
-                //property.IsTrending = false;
-                transaction.UserId = user.Id;
+
+                var category = _appdb.Categories.FirstOrDefault(c => c.Title == transactiondto.CategoryName);
+                if (category == null)
+                    return NotFound();
+
+                Transaction transaction = new()
+                {
+                    UserId = user.Id,
+                    CategoryId = category.Id,
+                    Amount = transactiondto.Amount,
+                    Note = transactiondto.Title,
+                    Date = transactiondto.Date
+                };
                 _appdb.Transactions.Add(transaction);
                 _appdb.SaveChanges();
                 return StatusCode(StatusCodes.Status201Created);
@@ -181,4 +136,60 @@ namespace ExpenseTrackerApplication.Controllers
 }
 
 
+//[HttpGet("CategoryId/{id}")]
+//[Authorize]
+////https://localhost:7145/api/transactions/usertransactionsbycategory?categoryid=0
+//public IActionResult GetTransactionsByCategory(string id)
+//{
+//    var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+//    var user = _appdb.Users.FirstOrDefault(u => u.Email == userEmail);
 
+//    int categoryId = int.Parse(id);
+//    var transactions = _appdb.Transactions.Where(x => x.UserId == user.Id && x.CategoryId == categoryId).Select(
+//                t => new TransactionDTO(t.Category.Title, t.Category.Type.ToLower(), t.Amount, t.Note, t.Date.ToString("D")));
+
+//    if (transactions.IsNullOrEmpty())
+//        return NotFound();
+//    else
+//        return Ok(transactions);
+//}
+
+//[HttpGet("Date/{day}")]
+//[Authorize]
+////https://localhost:7145/api/transactions/usertransactionsbydate?date=yyyy-MM-dd
+//public IActionResult GetTransactionsByDate(string day)
+//{
+//    var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+//    var user = _appdb.Users.FirstOrDefault(u => u.Email == userEmail);
+
+//    DateTime date = DateTime.Parse(day);
+//    var transactions = _appdb.Transactions.Where(x => x.UserId == user.Id && x.Date == date).Select(
+//                t => new TransactionDTO(t.Category.Title, t.Category.Type.ToLower(), t.Amount, t.Note, t.Date.ToString("D")));
+
+//    if (transactions.IsNullOrEmpty())
+//        return NotFound();
+//    else
+//        return Ok(transactions);
+//}
+
+//[HttpGet("{id}")]
+//[Authorize]
+////https://localhost:7145/api/transactions/usertransactiondetails?id=0
+//public IActionResult GetTransactionDetail(int id)
+//{
+//    var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+//    var user = _appdb.Users.FirstOrDefault(u => u.Email == userEmail);
+
+//    var transaction = _appdb.Transactions.FirstOrDefault(c => c.Id == id && c.UserId == user.Id);
+
+//    if(transaction == null) 
+//        return BadRequest();
+
+//    var transactiondto = _appdb.Transactions.Where(x => x.Id == transaction.Id).Select(
+//                t => new TransactionDTO(t.Category.Title, t.Category.Type.ToLower(), t.Amount, t.Note, t.Date.ToString("D")));
+
+//    if (transactiondto.IsNullOrEmpty())
+//        return NotFound();
+//    else
+//        return Ok(transactiondto);
+//}

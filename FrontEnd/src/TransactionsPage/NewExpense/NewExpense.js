@@ -5,17 +5,17 @@ import './NewExpense.css';
 
 const NewExpense = (props) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [lastUsedId, setLastUsedId] = useState(10);
+  // const [lastUsedId, setLastUsedId] = useState(10);
 
   const saveExpenseDataHandler = (enteredExpenseData) => {
-    const newId = lastUsedId + 1;
+    // const newId = lastUsedId + 1;
     const expenseData = {
       ...enteredExpenseData,
-      id: newId,
+      // id: newId,
     };
     props.onAddExpense(expenseData);
     console.log(expenseData);
-    setLastUsedId(newId);
+    // setLastUsedId(newId);
     setIsEditing(false);
   };
 

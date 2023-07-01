@@ -19,11 +19,12 @@ const Login = () => {
     axios.post(`https://localhost:7145/api/Users/Login`,userData
     ).then((res)=>{
       console.log(res);
-      alert("Successfully logged in!");
+      // alert("Successfully logged in!");
       localStorage.setItem('usertoken',res.data);
     }).catch((error)=>
     {
-      alert("Check email id or password and try again. :')");
+      console.log(error);
+      alert("Check email id or password and try again.");
     });
     navigate('/homemain');
   };

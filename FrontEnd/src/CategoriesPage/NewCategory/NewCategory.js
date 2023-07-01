@@ -28,7 +28,7 @@ const NewCategory = (props) => {
   };
 
   return (
-    <div className='new-expense'>
+    <div className='new-category'>
       {!isEditing && (
         <button onClick={startEditingHandler}>Add New Category</button>
       )}

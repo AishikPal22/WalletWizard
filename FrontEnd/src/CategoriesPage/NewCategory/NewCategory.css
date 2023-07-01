@@ -1,5 +1,9 @@
-.new-expense {
-  background-color: rgb(31, 31, 31);
+.new-category {
+  background: #fccb90;
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
   padding: 1rem;
   margin: 2rem auto;
   width: 50rem;
@@ -9,30 +13,30 @@
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
 }
 
-.new-expense button {
+.new-category button {
   font: inherit;
   cursor: pointer;
   padding: 1rem 2rem;
-  border: 1px solid #40005d;
-  background-color: #6e84ff;
+  /* border: 1px solid #40005d; */
+  background-color: #3a3a3a;
   color: white;
   border-radius: 12px;
   margin-right: 1rem;
 }
 
-.new-expense button:hover,
-.new-expense button:active {
-  background-color: #5366e3;
-  border-color: #510674;
+.new-category button:hover,
+.new-category button:active {
+  background-color: #2a2a2a;
+  /* border-color: #510674; */
 }
 
-.new-expense button.alternative {
+/* .new-category button.alternative {
   color: #006699;
   border-color: transparent;
   background-color: transparent;
 }
 
-.new-expense button.alternative:hover,
-.new-expense button.alternative:active {
+.new-category button.alternative:hover,
+.new-category button.alternative:active {
   background-color: #b3e6ff;
-}
+} */

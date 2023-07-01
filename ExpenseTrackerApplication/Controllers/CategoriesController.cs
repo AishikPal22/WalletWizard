@@ -25,12 +25,12 @@ namespace ExpenseTrackerApplication.Controllers
             if (user == null)
                 return NotFound();
 
-            var items = _appdb.Categories.Select(c => new { c.Id, c.Title, type = c.Type.ToLower() });
+            var items = _appdb.Categories.Select(c => new { c.Id, c.Title, type = c.Type });
             return Ok(items);
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         //https://localhost:7145/api/categories
         public IActionResult Post([FromBody] Category category)
         {
@@ -41,12 +41,14 @@ namespace ExpenseTrackerApplication.Controllers
                 var user = _appdb.Users.FirstOrDefault(u => u.Email == userEmail);
                 if (user == null)
                     return NotFound();
-                else
-                {
-                    _appdb.Categories.Add(category);
-                    _appdb.SaveChanges();
-                    return StatusCode(StatusCodes.Status201Created);
-                }
+
+                var itemExists = _appdb.Categories.FirstOrDefault(m => m.Title == category.Title);
+                if (itemExists != null)
+                    return BadRequest();
+
+                _appdb.Categories.Add(category);
+                _appdb.SaveChanges();
+                return StatusCode(StatusCodes.Status201Created);
             }
         }
     }

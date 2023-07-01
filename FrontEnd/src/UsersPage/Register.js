@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom/dist';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './Main.css';
-
+import axios from 'axios';
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -20,6 +20,16 @@ const Register = () => {
       password
     };
     setUser(userData);
+    axios.post(`https://localhost:7145/api/Users/Register`,userData
+    ).then((res)=>{
+      console.log(res);
+      alert("Successfully logged in!");
+      // localStorage.setItem('usertoken',res.data);
+    }).catch((error)=>
+    {
+      console.log(error);
+      alert("Something went wrong! Try again.");
+    });
     navigate('/');
   };
 

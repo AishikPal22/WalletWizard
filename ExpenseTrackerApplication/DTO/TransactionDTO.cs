@@ -2,20 +2,21 @@
 {
     public class TransactionDTO
     {
-        //public int TransactionId { get; set; }
+        public int Id { get; set; }
+        public DateTime Date { get; set; }
+        public string Title { get; set; }
         public string CategoryName { get; set; }
         public string CategoryType { get; set; }
         public int Amount { get; set; }
-        public string Note { get; set; }
-        public string Date { get; set; }
 
-        public TransactionDTO(string name, string type, int amount, string note, string date)
+        public TransactionDTO(int id, DateTime date, string name, string category, string type, int amount)
         {
-            CategoryName = name;
+            Id = id;
+            Date = date;
+            Title = name;
+            CategoryName = category;
             CategoryType = type;
             Amount = amount;
-            Note = note;
-            Date = date;
         }
     }
 }

@@ -12,3 +12,7 @@ https://localhost:7145/api/Users/Login
 https://localhost:7145/api/Categories
 
 https://localhost:7145/api/Home/CurrentBalance
+
+https://localhost:7145/api/Transactions/MyTransactions
+
+

@@ -6,7 +6,9 @@ const ExpensesChart = (props) => {
   const getUniqueMonths = (expenses) => {
     const uniqueMonths = [];
     expenses.forEach((expense) => {
-      const month = expense.date.toLocaleString('en-US', { month: 'long' });
+      // const month = expense.date.toLocaleString('en-US', { month: 'long' });
+      const dateObject = new Date(expense.date);
+      const month = dateObject.toLocaleString('en-US', { month: 'long' });
       if (!uniqueMonths.includes(month)) {
         uniqueMonths.push(month);
       }
@@ -20,9 +22,10 @@ const ExpensesChart = (props) => {
   const datasets = categories.map((category) => {
     const data = months.map((month) => {
       const totalAmount = props.expenses
-        .filter((expense) => expense.category === category)
+        .filter((expense) => expense.categoryType === category)
         .reduce((total, expense) => {
-          const expenseMonth = expense.date.toLocaleString('en-US', { month: 'long' });
+          const dateObject = new Date(expense.date);
+          const expenseMonth = dateObject.toLocaleString('en-US', { month: 'long' });
           if (expenseMonth === month) {
             return total + parseFloat(expense.amount);
           }
