@@ -40,3 +40,13 @@
     height:37rem;
   }
 }
+
+.hover-effect:hover {
+  background-color: #286090; /* Update with your desired hover background color */
+  /* Add more styles for the hover effect if needed */
+}
+
+.register-button:hover {
+  background-color: #286090; /* Update with your desired hover background color */
+  /* Add more styles for the hover effect if needed */
+}

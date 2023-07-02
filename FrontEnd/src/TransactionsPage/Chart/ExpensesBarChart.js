@@ -6,7 +6,6 @@ const ExpensesChart = (props) => {
   const getUniqueMonths = (expenses) => {
     const uniqueMonths = [];
     expenses.forEach((expense) => {
-      // const month = expense.date.toLocaleString('en-US', { month: 'long' });
       const dateObject = new Date(expense.date);
       const month = dateObject.toLocaleString('en-US', { month: 'long' });
       if (!uniqueMonths.includes(month)) {
@@ -14,13 +13,14 @@ const ExpensesChart = (props) => {
       }
     });
     return uniqueMonths;
-  };  
+  };
 
   const months = getUniqueMonths(props.expenses);
+  const reversedMonths = [...months].reverse(); // Reverse the sequence of months
 
   const categories = ['Expense', 'Income'];
   const datasets = categories.map((category) => {
-    const data = months.map((month) => {
+    const data = reversedMonths.map((month) => {
       const totalAmount = props.expenses
         .filter((expense) => expense.categoryType === category)
         .reduce((total, expense) => {
@@ -43,7 +43,7 @@ const ExpensesChart = (props) => {
   });
 
   const chartData = {
-    labels: months,
+    labels: reversedMonths,
     datasets: datasets,
   };
 
@@ -69,8 +69,8 @@ const ExpensesChart = (props) => {
     },
     responsive: true,
     maintainAspectRatio: false,
-    barPercentage: 0.6, 
-    categoryPercentage: 0.8, 
+    barPercentage: 0.6,
+    categoryPercentage: 0.8,
   };
 
   return <Bar data={chartData} options={options} />;

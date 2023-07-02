@@ -6,31 +6,31 @@ import axios from 'axios';
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [phoneNo, setPhoneNo] = useState('');
+  const [phone, setPhoneNo] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const userData = {
       name,
       email,
-      phoneNo,
+      phone,
       password
     };
     setUser(userData);
-    axios.post(`https://localhost:7145/api/Users/Register`,userData
-    ).then((res)=>{
-      console.log(res);
-      alert("Successfully logged in!");
-      // localStorage.setItem('usertoken',res.data);
-    }).catch((error)=>
-    {
+    console.log(userData);
+    try {
+      const response = await axios.post('https://localhost:7145/api/Users/Register', userData);
+      console.log(response);
+      console.log('Successfully registered!');
+      navigate('/');
+    } catch (error) {
       console.log(error);
-      alert("Something went wrong! Try again.");
-    });
-    navigate('/');
+      alert('Something went wrong! Try again.');
+    }
+    
   };
 
   return (
@@ -71,7 +71,7 @@ const Register = () => {
 
                       <div class="form-outline mb-4">
                         <input type="phoneNo" id="form2Example22" class="form-control"
-                          placeholder="Mobile Number" value={phoneNo} onChange={(e) => setPhoneNo(e.target.value)} />
+                          placeholder="Mobile Number" value={phone} onChange={(e) => setPhoneNo(e.target.value)} />
                       </div>
 
                       <div class="form-outline mb-4">
@@ -85,20 +85,11 @@ const Register = () => {
                       </div>
 
                       <div class="text-center pt-1 mb-5 pb-1">
-                        <button class="btn btn-primary btn-block fa-lg gradient-custom-1 mb-3 w-100" type="submit">
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-1 mb-3 w-100 register-button" 
+                                type="submit" onClick={handleSubmit}>
                           Sign Up
                         </button>
-                        {/* <div>
-                          <a class="text-muted" href="#!">Forgot password?</a>
-                        </div> */}
                       </div>
-
-                      {/* <div class="d-flex align-items-center justify-content-center pb-4">
-                        <p class="mb-0 me-2">Don't have an account?</p>
-                        <div>
-                          <button type="button" class="btn btn-outline-danger">Create new</button>
-                        </div>
-                      </div> */}
 
                     </form>
 
@@ -115,38 +106,3 @@ const Register = () => {
 };
 
 export default Register;
-
-  // <div className="register-container">
-  //   <h2 style={{cursor: 'default'}}><font color="white">Create your account:</font></h2>
-  //   <form onSubmit={handleSubmit}>
-  //     <div>
-  //       <input
-  //         type="text"
-  //         placeholder="Name"
-  //         value={name}
-  //         onChange={(e) => setName(e.target.value)}
-  //       />
-  //       <input
-  //         type="email"
-  //         placeholder="Email"
-  //         value={email}
-  //         onChange={(e) => setEmail(e.target.value)}
-  //       />
-  //     </div>
-  //     <div>
-  //       <input
-  //         type="phoneNo"
-  //         placeholder="Mobile Number"
-  //         value={phoneNo}
-  //         onChange={(e) => setPhoneNo(e.target.value)}
-  //       />
-  //       <input
-  //         type="password"
-  //         placeholder="Password"
-  //         value={password}
-  //         onChange={(e) => setPassword(e.target.value)}
-  //       />
-  //     </div>
-  //     <button type="submit">Register</button>
-  //   </form>
-  // </div>

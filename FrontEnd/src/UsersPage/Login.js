@@ -16,20 +16,10 @@ const Login = () => {
       password
     };
     setUser(userData);
-    // axios.post(`https://localhost:7145/api/Users/Login`,userData
-    // ).then((res)=>{
-    //   console.log(res);
-    //   // alert("Successfully logged in!");
-    //   localStorage.setItem('usertoken',res.data);
-    // }).catch((error)=>
-    // {
-    //   console.log(error);
-    //   alert("Check email id or password and try again.");
-    // });
-    // navigate('/homemain');
     try {
       const response = await axios.post(`https://localhost:7145/api/Users/Login`, userData);
       console.log(response);
+      console.log('Successfully logged in!');
       localStorage.setItem('usertoken', response.data);
       navigate('/homemain');
     } catch (error) {
@@ -40,8 +30,6 @@ const Login = () => {
 
 
   const handleNavigation = () => {
-    // Perform any necessary logic here
-    // Navigate to the desired route
     navigate('/register');
   };
 
@@ -89,12 +77,10 @@ const Login = () => {
                       </div>
 
                       <div class="text-center pt-1 mb-5 pb-1">
-                        <button class="btn btn-primary btn-block fa-lg gradient-custom-1 mb-3 w-100" type="submit" onClick={handleSubmit}>
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-1 mb-3 w-100 login-button hover-effect" 
+                                type="submit" onClick={handleSubmit}>
                           Log in
                         </button>
-                        {/* <div>
-                          <a class="text-muted" href="#!">Forgot password?</a>
-                        </div> */}
                       </div>
 
                       <div class="d-flex align-items-center justify-content-center pb-4">
@@ -119,22 +105,3 @@ const Login = () => {
 };
 
 export default Login;
-
-  // <div className="login-container">
-  //   <h2 style={{cursor: 'default'}}><font color="white">Welcome Back!</font></h2>
-  //   <form onSubmit={handleSubmit}>
-  //     <input
-  //       type="email"
-  //       placeholder="Email"
-  //       value={email}
-  //       onChange={(e) => setEmail(e.target.value)}
-  //     />
-  //     <input
-  //       type="password"
-  //       placeholder="Password"
-  //       value={password}
-  //       onChange={(e) => setPassword(e.target.value)}
-  //     />
-  //     <button type="submit">Login</button>
-  //   </form>
-  // </div>

@@ -5,17 +5,13 @@ import './NewCategory.css';
 
 const NewCategory = (props) => {
   const [isEditing, setIsEditing] = useState(false);
-  // const [lastUsedId, setLastUsedId] = useState(10);
   
   const saveCategoryDataHandler = (enteredCategoryData) => {
-    // const newId = lastUsedId + 1;
     const categoryData = {
       ...enteredCategoryData,
-      // id: newId,
     };
     props.onAddCategory(categoryData);
     console.log(categoryData);
-    // setLastUsedId(newId);
     setIsEditing(false);
   };
 

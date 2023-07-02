@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Chart from './Chart';
-import './Main.css';
-
 import Nav from 'react-bootstrap/Nav';
 import { NavLink, useNavigate } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import { Modal, Button } from 'react-bootstrap';
+
+import Chart from './Chart';
+import './Main.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Main() {
@@ -34,7 +34,6 @@ function Main() {
     // Clear the token from localStorage or wherever it is stored
     localStorage.removeItem('usertoken');
     setShowLogoutModal(false);
-    // window.location.reload();
     // Redirect the user to the login or home page
     navigate('/');
   };
@@ -55,12 +54,9 @@ function Main() {
             <NavLink to="/homemain" className="nav nav-link  custom-link" >WalletWizard.com</NavLink>
           </Nav>
           <Nav className="ms-auto">
-            {/* <Nav.Link href="#Categories" >Categories</Nav.Link> */}
             <NavLink to="/categories" className="nav nav-link  custom-link">Categories</NavLink>
-            {/* <Nav.Link href="#Transactions" >Transactions</Nav.Link> */}
             <NavLink to="/transactions" className="nav nav-link  custom-link">Transactions</NavLink>
-            {/* <NavLink to="/" className="nav nav-link  custom-link" onClick={logoutHandler}>Logout</NavLink> */}
-            <Nav.Link onClick={handleLogoutConfirmation}>Logout</Nav.Link>
+            <Button variant="link" className="nav-link custom-link" onClick={handleLogoutConfirmation}>Logout</Button>
           </Nav>
         </Navbar>
       </div>
