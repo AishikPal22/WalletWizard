@@ -4,6 +4,9 @@ import Nav from 'react-bootstrap/Nav';
 import { NavLink, useNavigate } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import { Modal, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 import Chart from './Chart';
 import './Main.css';
@@ -45,26 +48,43 @@ function Main() {
   const handleLogoutCancel = () => {
     setShowLogoutModal(false);
   };
-  
+
   return (
     <>
       <div>
         <Navbar variant="dark" className="custom-navbar">
           <Nav className="me-auto">
-            <NavLink to="/homemain" className="nav nav-link  custom-link" >WalletWizard.com</NavLink>
+            {/* <NavLink to="/homemain" className="nav nav-link  custom-link" >WalletWizard.com</NavLink> */}
+            <Button style={{
+              background: 'transparent',
+              fontFamily: 'sans-serif',
+              padding: '0.5rem 0.5rem',
+              fontSize: '1.5rem',
+              color: 'white',
+              cursor: 'default',
+              border: 'none'
+            }}><FontAwesomeIcon icon={faHome} style={{ marginRight: '0.5rem' }} />
+              Home</Button>
           </Nav>
           <Nav className="ms-auto">
             <NavLink to="/categories" className="nav nav-link  custom-link">Categories</NavLink>
             <NavLink to="/transactions" className="nav nav-link  custom-link">Transactions</NavLink>
-            <Button variant="link" className="nav-link custom-link" onClick={handleLogoutConfirmation} outline>Logout</Button>
+            <Button className="btn btn-outline-light" style={{
+              background: 'transparent',
+              fontFamily: 'sans-serif',
+              padding: '0.5rem 0.5rem',
+              fontSize: '1.5rem',
+              color: 'white'
+            }} onClick={handleLogoutConfirmation}><FontAwesomeIcon icon={faSignOutAlt} style={{ marginRight: '0.5rem' }} />
+              Logout</Button>
           </Nav>
         </Navbar>
       </div>
       <Modal show={showLogoutModal} onHide={handleLogoutCancel}>
-        <Modal.Header closeButton>
-          <Modal.Title>Logout Confirmation</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to logout?</Modal.Body>
+        {/* <Modal.Header closeButton>
+          <Modal.Title>Are you sure you want to log out?</Modal.Title>
+        </Modal.Header> */}
+        <Modal.Body>Are you sure you want to log out?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleLogoutCancel}>
             Cancel

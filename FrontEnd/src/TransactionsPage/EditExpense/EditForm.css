@@ -1,7 +1,7 @@
 .edit__controls {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-wrap:inherit;
+  gap: 0.5rem;
   margin-bottom: 1rem;
   justify-content: center; /* Add this line for horizontal center alignment */
   align-items: center; /* Add this line for vertical center alignment */

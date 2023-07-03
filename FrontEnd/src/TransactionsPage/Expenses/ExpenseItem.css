@@ -89,7 +89,7 @@
   }
 
   .expense-item__edit {
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: sans-serif;
     display: flex;
     cursor:pointer;
     justify-content: space-between;
@@ -113,7 +113,7 @@
   }
 
   .expense-item__delete {
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: sans-serif;
     display: flex;
     cursor:pointer;
     justify-content: space-between;

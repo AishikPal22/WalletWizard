@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import './ExpenseForm.css';
 
@@ -8,8 +9,24 @@ const ExpenseForm = (props) => {
   const [enteredCategory, setEnteredCategory] = useState('');
   const [enteredDate, setEnteredDate] = useState('');
 
-  // eslint-disable-next-line
-  //const currentYear = new Date().getFullYear();
+  const [categoryOptions, setCategoryOptions] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const token = localStorage.getItem('usertoken');
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+        const response = await axios.get('https://localhost:7145/api/Categories', { headers });
+        setCategoryOptions(response.data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
   const minDate = '2023-04-01';
   const maxDate = '2024-03-31';
 
@@ -21,14 +38,14 @@ const ExpenseForm = (props) => {
     setEnteredAmount(event.target.value);
   };
 
-  const categoryChangeHandler = (event) => {
-    setEnteredCategory(event.target.value);
-  };
-
-  // const dropdownChangeHandler = (event) => {
+  // const categoryChangeHandler = (event) => {
   //   setEnteredCategory(event.target.value);
-  //   console.log(event.target.value);
   // };
+
+  const dropdownChangeHandler = (event) => {
+    setEnteredCategory(event.target.value);
+    console.log(event.target.value);
+  };
 
   const dateChangeHandler = (event) => {
     setEnteredDate(event.target.value);
@@ -37,7 +54,7 @@ const ExpenseForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    if (!enteredCategory|| enteredCategory === '') {
+    if (!enteredCategory || enteredCategory === '') {
       return;
     }
 
@@ -89,16 +106,14 @@ const ExpenseForm = (props) => {
         </div>
         <div className='new-expense__control'>
           <label>Category</label>
-          {/* <select className='category-select' value={enteredCategory} onChange={dropdownChangeHandler}>
-            <option value=''>Select Category</option>
-            <option value='Income'>Income</option>
-            <option value='Expense'>Expense</option>
-          </select> */}
-          <input
-            type='text'
-            value={enteredCategory}
-            onChange={categoryChangeHandler}
-          />
+          <select className="category-select" value={enteredCategory} onChange={dropdownChangeHandler}>
+            <option value="">Select Category</option>
+            {categoryOptions.map((category) => (
+              <option key={category.id} value={category.title}>
+                {category.title}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
       <div className='new-expense__actions'>

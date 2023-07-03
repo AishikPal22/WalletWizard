@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import './EditForm.css';
 
@@ -7,6 +8,24 @@ const EditForm = (props) => {
   const [enteredAmount, setEnteredAmount] = useState(props.expense.amount);
   const [enteredCategory, setEnteredCategory] = useState(props.expense.categoryName);
   const [enteredDate, setEnteredDate] = useState(props.expense.date);
+
+  const [categoryOptions, setCategoryOptions] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const token = localStorage.getItem('usertoken');
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+        const response = await axios.get('https://localhost:7145/api/Categories', { headers });
+        setCategoryOptions(response.data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   const minDate = '2023-04-01';
   const maxDate = '2024-03-31';
@@ -19,8 +38,13 @@ const EditForm = (props) => {
     setEnteredAmount(event.target.value);
   };
 
-  const categoryChangeHandler = (event) => {
+  // const categoryChangeHandler = (event) => {
+  //   setEnteredCategory(event.target.value);
+  // };
+
+  const dropdownChangeHandler = (event) => {
     setEnteredCategory(event.target.value);
+    console.log(event.target.value);
   };
 
   const dateChangeHandler = (event) => {
@@ -86,16 +110,14 @@ const EditForm = (props) => {
         </div>
         <div className='edit__control'>
           <label>Category</label>
-          {/* <select className='category-select' value={enteredCategory} onChange={categoryChangeHandler}>
-            <option value=''>Select Category</option>
-            <option value='Income'>Income</option>
-            <option value='Expense'>Expense</option>
-          </select> */}
-          <input
-            type='text'
-            value={enteredCategory}
-            onChange={categoryChangeHandler}
-          />
+          <select className="category-select" value={enteredCategory} onChange={dropdownChangeHandler}>
+            <option value="">Select Category</option>
+            {categoryOptions.map((category) => (
+              <option key={category.id} value={category.title}>
+                {category.title}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
       <div className='edit__actions'>

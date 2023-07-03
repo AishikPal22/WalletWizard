@@ -3,6 +3,9 @@ import Nav from 'react-bootstrap/Nav';
 import { NavLink, useNavigate } from "react-router-dom"
 import Navbar from 'react-bootstrap/Navbar';
 import { Modal, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 import NewExpense from './NewExpense/NewExpense';
@@ -12,7 +15,7 @@ import '../HomePage/Main.css';
 
 
 const App = () => {
-  const t=localStorage.getItem('usertoken');
+  const t = localStorage.getItem('usertoken');
   const [expenses, setExpenses] = useState([]);
   const navigate = useNavigate();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -51,12 +54,12 @@ const App = () => {
         // Handle the error here
         console.error('Error adding expense:', error);
       });
-      // console.log(response.data);
+    // console.log(response.data);
   };
 
 
   const updateExpenseHandler = (updatedExpenseData) => {
-   const headers = {
+    const headers = {
       'Authorization': `Bearer ${t}`
     };
     console.log(updatedExpenseData);
@@ -84,6 +87,10 @@ const App = () => {
 
 
   const deleteExpenseHandler = (expenseId) => {
+    const shouldDelete = window.confirm('Are you sure you want to delete this expense?');
+    if (!shouldDelete) {
+      return; // User cancelled the deletion
+    }
     axios.delete(`https://localhost:7145/api/Transactions/${expenseId}`, {
       headers: {
         'Authorization': `Bearer ${t}`
@@ -93,14 +100,14 @@ const App = () => {
         setExpenses((prevExpenses) => {
           const updatedExpenses = prevExpenses.filter(
             (expense) => expense.id !== expenseId
-            );
-            return updatedExpenses;
-          });
-        })
-        .catch((error) => {
-          console.error('Error deleting expense:', error);
+          );
+          return updatedExpenses;
         });
-        // console.log(response.data);
+      })
+      .catch((error) => {
+        console.error('Error deleting expense:', error);
+      });
+    // console.log(response.data);
   };
 
   const handleLogout = () => {
@@ -119,27 +126,45 @@ const App = () => {
   const handleLogoutCancel = () => {
     setShowLogoutModal(false);
   };
-  
+
+  const handleHome = () => {
+    navigate("/homemain");
+  }
 
   return (
     <>
       <div>
         <Navbar variant="dark" className="custom-navbar">
           <Nav className="me-auto">
-            <NavLink to="/homemain" className="nav nav-link custom-link" >Home</NavLink>
+            {/* <NavLink to="/homemain" className="nav nav-link custom-link" >Home</NavLink> */}
+            <Button className="btn btn-outline-light" style={{
+              background: 'transparent',
+              fontFamily: 'sans-serif',
+              padding: '0.5rem 0.5rem',
+              fontSize: '1.5rem',
+              color: 'white'
+            }} onClick={handleHome}><FontAwesomeIcon icon={faHome} style={{ marginRight: '0.5rem' }} />
+              Home</Button>
           </Nav>
           <Nav className="ms-auto">
             <NavLink to="/categories" className="nav nav-link custom-link">Categories</NavLink>
             <NavLink to="/transactions" className="nav nav-link custom-link">Transactions</NavLink>
-            <Button variant="link" className="nav-link custom-link" onClick={handleLogoutConfirmation}>Logout</Button>
+            <Button className="btn btn-outline-light" style={{
+              background: 'transparent',
+              fontFamily: 'sans-serif',
+              padding: '0.5rem 0.5rem',
+              fontSize: '1.5rem',
+              color: 'white'
+            }} onClick={handleLogoutConfirmation}><FontAwesomeIcon icon={faSignOutAlt} style={{ marginRight: '0.5rem' }} />
+              Logout</Button>
           </Nav>
         </Navbar>
       </div>
       <Modal show={showLogoutModal} onHide={handleLogoutCancel}>
-        <Modal.Header closeButton>
-          <Modal.Title>Logout Confirmation</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to logout?</Modal.Body>
+        {/* <Modal.Header closeButton>
+          <Modal.Title>Are you sure you want to log out?</Modal.Title>
+        </Modal.Header> */}
+        <Modal.Body>Are you sure you want to log out?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleLogoutCancel}>
             Cancel
@@ -152,7 +177,7 @@ const App = () => {
       <div>
         <style>{'body { background-color: #3f3f3f; }'}</style>
         <NewExpense onAddExpense={addExpenseHandler} />
-        <Expenses items={expenses} onUpdateExpense={updateExpenseHandler} onDeleteExpense={deleteExpenseHandler}/>      
+        <Expenses items={expenses} onUpdateExpense={updateExpenseHandler} onDeleteExpense={deleteExpenseHandler} />
       </div>
     </>
   );
