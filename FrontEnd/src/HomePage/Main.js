@@ -56,7 +56,7 @@ function Main() {
           <Nav className="ms-auto">
             <NavLink to="/categories" className="nav nav-link  custom-link">Categories</NavLink>
             <NavLink to="/transactions" className="nav nav-link  custom-link">Transactions</NavLink>
-            <Button variant="link" className="nav-link custom-link" onClick={handleLogoutConfirmation}>Logout</Button>
+            <Button variant="link" className="nav-link custom-link" onClick={handleLogoutConfirmation} outline>Logout</Button>
           </Nav>
         </Navbar>
       </div>

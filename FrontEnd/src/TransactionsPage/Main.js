@@ -74,6 +74,7 @@ const App = () => {
           });
           return updatedExpenses;
         });
+        window.location.reload();
       })
       .catch(error => {
         console.error('Error updating expense:', error);
