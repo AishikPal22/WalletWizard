@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import './ExpenseForm.css';
+import '../Styles.css';
 
 const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState('');
@@ -88,8 +88,8 @@ const ExpenseForm = (props) => {
           <label>Amount</label>
           <input
             type='number'
-            min='0.01'
-            step='0.01'
+            // min='0.01'
+            // step='0.01'
             value={enteredAmount}
             onChange={amountChangeHandler}
           />

@@ -1,6 +1,6 @@
 import React from 'react';
 import CategoriesList from './CategoriesList';
-import './Categories.css';
+import '../Styles.css';
 
 const Categories = (props) => {
   return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import './EditForm.css';
+import '../Styles.css';
 
 const EditForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState(props.expense.title);
@@ -92,8 +92,6 @@ const EditForm = (props) => {
           <label>Amount</label>
           <input
             type='number'
-            min='0.01'
-            step='0.01'
             value={enteredAmount}
             onChange={amountChangeHandler}
           />

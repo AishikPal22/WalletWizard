@@ -1,5 +1,5 @@
 import React from 'react';
-import './CategoryItem.css';
+import '../Styles.css';
 
 const CategoryItem = (props) => {
   return (

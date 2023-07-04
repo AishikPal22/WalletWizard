@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
 import ExpenseDate from './ExpenseDate';
-import './ExpenseItem.css';
+import '../Styles.css';
 import EditForm from '../EditExpense/EditForm';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const ExpenseItem = (props) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -41,10 +43,10 @@ const ExpenseItem = (props) => {
             <div className='expense-item__type'>{props.expense.categoryType}</div>
           </div>
           <div className='expense-item__actions'>
-            <button className='expense-item__edit' onClick={startEditingHandler}>Edit</button>
+            <button className='expense-item__edit' onClick={startEditingHandler}><FontAwesomeIcon icon={faPenToSquare} /></button>
           </div>
           <div className='expense-item__actions'>
-            <button className='expense-item__delete' onClick={deleteExpenseHandler}>Delete</button>
+            <button className='expense-item__delete' onClick={deleteExpenseHandler}><FontAwesomeIcon icon={faTrash} /></button>
           </div>
         </div>
       )}

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-
 import CategoryForm from './CategoryForm';
-import './NewCategory.css';
+import '../Styles.css';
 
 const NewCategory = (props) => {
   const [isEditing, setIsEditing] = useState(false);

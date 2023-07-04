@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom/dist';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWallet } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import './Main.css';
-import axios from 'axios';
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -42,7 +46,7 @@ const Login = () => {
               <div class="row g-0">
                 <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                   <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                    <div class="text-center"><h1 class="mb-4">WalletWizard.com</h1></div>
+                    <div class="text-center"><h1 class="mb-4"><FontAwesomeIcon icon={faWallet} /> WalletWizard</h1></div>
                     <div class="text-center"><h4 class="mb-4">Your Ultimate Financial Companion</h4></div>
                     <p class="small mb-0 text-center">Seeking a smart and efficient way to manage your finances? 
                       <br></br>Look no further than WalletWizard!<br></br><br></br>

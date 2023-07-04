@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 import Navbar from 'react-bootstrap/Navbar';
 import { Modal, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
@@ -101,7 +101,7 @@ const App = () => {
               padding: '0.5rem 0.5rem',
               fontSize: '1.5rem',
               color: 'white'
-            }} onClick={handleLogoutConfirmation}><FontAwesomeIcon icon={faSignOutAlt} style={{ marginRight: '0.5rem' }} />
+            }} onClick={handleLogoutConfirmation}><FontAwesomeIcon icon={faPowerOff} style={{ marginRight: '0.5rem' }} />
               Logout</Button>
           </Nav>
         </Navbar>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ExpensesFilter from './ExpensesFilter';
 import ExpensesList from './ExpensesList';
 import ExpensesBarChart from '../Chart/ExpensesBarChart';
-import './Expenses.css';
+import '../Styles.css';
 
 const Expenses = (props) => {
   const [filteredMonth, setFilteredMonth] = useState('');

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
-import './CategoryForm.css';
+import '../Styles.css';
 
 const CategoryForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState('');

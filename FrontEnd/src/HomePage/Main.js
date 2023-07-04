@@ -5,8 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import { Modal, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faPowerOff, faWallet } from '@fortawesome/free-solid-svg-icons';
 
 import Chart from './Chart';
 import './Main.css';
@@ -59,12 +58,12 @@ function Main() {
               background: 'transparent',
               fontFamily: 'sans-serif',
               padding: '0.5rem 0.5rem',
-              fontSize: '1.5rem',
+              fontSize: '1.8rem',
               color: 'white',
               cursor: 'default',
               border: 'none'
-            }}><FontAwesomeIcon icon={faHome} style={{ marginRight: '0.5rem' }} />
-              Home</Button>
+            }}><FontAwesomeIcon icon={faWallet} style={{ marginRight: '0.5rem', fontSize: '1.8rem' }} />
+              WalletWizard</Button>
           </Nav>
           <Nav className="ms-auto">
             <NavLink to="/categories" className="nav nav-link  custom-link">Categories</NavLink>
@@ -75,7 +74,7 @@ function Main() {
               padding: '0.5rem 0.5rem',
               fontSize: '1.5rem',
               color: 'white'
-            }} onClick={handleLogoutConfirmation}><FontAwesomeIcon icon={faSignOutAlt} style={{ marginRight: '0.5rem' }} />
+            }} onClick={handleLogoutConfirmation}><FontAwesomeIcon icon={faPowerOff} style={{ marginRight: '0.5rem' }} />
               Logout</Button>
           </Nav>
         </Navbar>
@@ -99,18 +98,18 @@ function Main() {
         <div className="data-container">
           <div className='row'>
             <div>
-              <h1 className='label'>Account Status:</h1>
+              <h1 className='label'>Account Status</h1>
               <div className='item'>
                 <h4 className="label">Total Income</h4>
-                <h2 className="amount">₹{data.totalIncome}</h2>
+                <h2 className="amount">₹ {data.totalIncome}</h2>
               </div>
               <div className='item'>
                 <h4 className="label">Total Expense</h4>
-                <h2 className="amount">₹{data.totalExpense}</h2>
+                <h2 className="amount">₹ {data.totalExpense}</h2>
               </div>
               <div className='item'>
                 <h4 className="label">Current Balance</h4>
-                <h2 className="amount">₹{data.totalIncome - data.totalExpense}</h2>
+                <h2 className="amount">₹ {data.totalIncome - data.totalExpense}</h2>
               </div>
             </div>
           </div>
