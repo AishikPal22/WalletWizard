@@ -97,8 +97,8 @@
     /* text-align: center; */
     color: #fff;
     font-size: 1rem;
-    background-color: #2a2a2a;
-    /* border: 1px solid #fff; */
+    /* background-color: #2a2a2a; */
+    border: 1px solid #fff;
     padding: 0.5rem;
     border-radius: 12px;
     margin-right: 1rem;
@@ -109,23 +109,26 @@
     /* text-align: center; */
     color: #fff;
     font-size: 1.4rem;
-    background-color: #2a2a2a;
-    /* border: 1px solid #fff; */
-    padding-left: 1rem;
+    /* background-color: #2a2a2a; */
+    border: 1px solid #fff;
+    /* padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
+    padding-bottom: 0.4rem; */
     border-radius: 12px;
     margin-right: 1rem;
     font-family: sans-serif;
+    padding: 0.4rem;
+    width: 7rem;
+    text-align: center;
   }
   
   .expense-item__price {
     font-size: 1rem;
     /* font-weight: bold; */
     color: white;
-    background-color: #2a2a2a;
-    /* border: 1px solid white; */
+    /* background-color: #2a2a2a; */
+    border: 1px solid white;
     padding: 0.5rem;
     border-radius: 12px;
     margin-right: 1rem;
@@ -239,14 +242,14 @@
     gap: 1rem;
     margin-bottom: 1rem;
     justify-content: center; 
-    align-items: center; 
+    /* align-items: center;  */
     text-align: center; 
   }
   
   .new-expense__control label{
     color: white; 
     font-family: sans-serif;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     display: block;
   }
   
@@ -272,6 +275,9 @@
   
   .new-expense__actions {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
   }
   
   .new-expense__actions button {
@@ -282,7 +288,7 @@
     border: none;
     color: white;
     background-color: #3a3a3a; 
-    margin-right: 1rem;
+    /* margin-right: 1rem; */
   }
   
   .new-expense__actions button:hover,
@@ -323,7 +329,7 @@
   .edit__controls {
     display: flex;
     flex-wrap:inherit;
-    gap: 0.5rem;
+    gap: 1rem;
     margin-bottom: 1rem;
     justify-content: center; 
     align-items: center; 
@@ -332,8 +338,9 @@
   }
   
   .edit__control label {
-    /* font-weight: bold; */
-    margin-bottom: 0.5rem;
+    font-family: sans-serif;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
     display: block;
     color: white;
   }

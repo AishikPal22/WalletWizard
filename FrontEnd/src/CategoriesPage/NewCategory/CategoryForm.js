@@ -59,7 +59,7 @@ const CategoryForm = (props) => {
         </div>
         <div className='button-container'>
           <button type="button" onClick={props.onCancel}>Cancel</button>
-          <button type='submit'>Add</button>
+          <button type='submit'>Submit</button>
         </div>
       </div>
     </form>

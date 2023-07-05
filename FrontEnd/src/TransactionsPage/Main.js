@@ -164,8 +164,8 @@ const App = () => {
         {/* <Modal.Header closeButton>
           <Modal.Title>Are you sure you want to log out?</Modal.Title>
         </Modal.Header> */}
-        <Modal.Body>Are you sure you want to log out?</Modal.Body>
-        <Modal.Footer>
+        <Modal.Body style={{fontFamily:'sans-serif'}}>Are you sure you want to log out?</Modal.Body>
+        <Modal.Footer style={{fontFamily:'sans-serif'}}>
           <Button variant="secondary" onClick={handleLogoutCancel}>
             Cancel
           </Button>

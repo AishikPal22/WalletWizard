@@ -38,17 +38,17 @@ const Register = () => {
   };
 
   return (
-    <section class="h-120 gradient-form" style={{ backgroundColor: '#3f3f3f' }}>
+    <section class="h-120 gradient-form" style={{ backgroundColor: '#3f3f3f', fontFamily:'sans-serif' }}>
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-xl-10">
             <div class="card rounded-3 text-black">
               <div class="row g-0">
-                <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                <div class="col-lg-6 d-flex align-items-center gradient-custom-2" style={{cursor:'default'}}>
                   <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                     <div class="text-center"><h1 class="mb-4"><FontAwesomeIcon icon={faWallet} /> WalletWizard</h1></div>
                     <div class="text-center"><h4 class="mb-4">Your Ultimate Financial Companion</h4></div>
-                    <p class="small mb-0 text-center">Seeking a smart and efficient way to manage your finances?
+                    <p class="medium mb-0 text-center">Seeking a smart and efficient way to manage finances?
                       <br></br>Look no further than WalletWizard!<br></br><br></br>
                       Our powerful app is designed to revolutionize the way you track your expenses, manage your budgets, and achieve your financial goals.
                       With WalletWizard, you can effortlessly monitor your income, expenses, and savings all in one place.
@@ -56,17 +56,17 @@ const Register = () => {
                     </p>
                   </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6" style={{fontWeight:'normal'}}>
                   <div class="card-body p-md-5 mx-md-4">
 
-                    <div class="text-center">
+                    <div class="text-center" style={{cursor:'default'}}>
                       {/* <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
                         style="width: 185px;" alt="logo"> */}
                       <h4 class="mt-1 mb-5 pb-1">Welcome!</h4>
                     </div>
 
                     <form onSubmit={handleSubmit}>
-                      <p class="text-center">Create your account</p>
+                      <p class="text-center" style={{cursor:'default'}}>Create your account</p>
 
                       <div class="form-outline mb-4">
                         <input type="text" id="form2Example11" class="form-control"

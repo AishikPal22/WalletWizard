@@ -29,7 +29,7 @@ const EditForm = (props) => {
 
   const minDate = '2023-04-01';
   const maxDate = '2024-03-31';
-  
+
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
   };
@@ -54,7 +54,7 @@ const EditForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    if (!enteredCategory|| enteredCategory === '') {
+    if (!enteredCategory || enteredCategory === '') {
       return;
     }
 
@@ -80,47 +80,51 @@ const EditForm = (props) => {
   return (
     <form onSubmit={submitHandler}>
       <div className='edit__controls'>
-        <div className='edit__control'>
-          <label>Title</label>
-          <input
-            type='text'
-            value={enteredTitle}
-            onChange={titleChangeHandler}
-          />
+        <div>
+          <div className='edit__control'>
+            <label>Title</label>
+            <input
+              type='text'
+              value={enteredTitle}
+              onChange={titleChangeHandler}
+            />
+          </div>
+          <div className='edit__control'>
+            <label>Amount</label>
+            <input
+              type='number'
+              value={enteredAmount}
+              onChange={amountChangeHandler}
+            />
+          </div>
         </div>
-        <div className='edit__control'>
-          <label>Amount</label>
-          <input
-            type='number'
-            value={enteredAmount}
-            onChange={amountChangeHandler}
-          />
-        </div>
-        <div className='edit__control'>
-          <label>Date</label>
-          <input
-            type='date'
-            min={minDate}
-            max={maxDate}
-            value={enteredDate}
-            onChange={dateChangeHandler}
-          />
-        </div>
-        <div className='edit__control'>
-          <label>Category</label>
-          <select className="category-select" value={enteredCategory} onChange={dropdownChangeHandler}>
-            <option value="">Select Category</option>
-            {categoryOptions.map((category) => (
-              <option key={category.id} value={category.title}>
-                {category.title}
-              </option>
-            ))}
-          </select>
+        <div>
+          <div className='edit__control'>
+            <label>Date</label>
+            <input
+              type='date'
+              min={minDate}
+              max={maxDate}
+              value={enteredDate}
+              onChange={dateChangeHandler}
+            />
+          </div>
+          <div className='edit__control'>
+            <label>Category</label>
+            <select className="category-select" value={enteredCategory} onChange={dropdownChangeHandler}>
+              <option value="">Select Category</option>
+              {categoryOptions.map((category) => (
+                <option key={category.id} value={category.title}>
+                  {category.title}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
       <div className='edit__actions'>
         <button type="button" onClick={cancelHandler}>Cancel</button>
-        <button type='submit'>Done</button>
+        <button type='submit'>Update</button>
       </div>
     </form>
   );
