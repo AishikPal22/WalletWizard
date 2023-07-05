@@ -25,7 +25,7 @@ const NewCategory = (props) => {
   return (
     <div className='new-category'>
       {!isEditing && (
-        <button onClick={startEditingHandler}>Add New Category</button>
+        <button onClick={startEditingHandler}>Add new Category</button>
       )}
       {isEditing && (
         <CategoryForm

@@ -6,7 +6,7 @@ import '../Styles.css';
 const CategoriesList = (props) => {
   console.log(props);
   if (props.items.length === 0) {
-    return <h2 className='categories-list__fallback'>Found no categories.</h2>;
+    return <h3 className='categories-list__fallback'>Found no categories.</h3>;
   }
 
   return (

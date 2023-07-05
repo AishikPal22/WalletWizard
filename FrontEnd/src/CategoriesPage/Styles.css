@@ -6,7 +6,7 @@
     width: 50rem;
     max-width: 95%;
     border-radius: 12px;
-    text-align: left;
+    /* text-align: left; */
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
   }
 
@@ -18,6 +18,8 @@
   .categories-list__fallback {
     color: white;
     text-align: center;
+    font-family: sans-serif;
+    margin-top: 1rem;
   }
 
   .category-item {
@@ -42,6 +44,7 @@
     flex-flow: column-reverse;
     justify-content: flex-start;
     flex: 1;
+    font-family: sans-serif;
   }
   
   .category-item h2 {
@@ -50,6 +53,7 @@
     flex: 1;
     margin: 0 1rem;
     color: white;
+    font-family: sans-serif;
   }
   
   .category-item__price {
@@ -60,6 +64,7 @@
     padding: 0.5rem;
     border-radius: 12px;
     margin-right: 0.5rem;
+    font-family: sans-serif;
   }
   
   @media (min-width: 580px) {
@@ -72,11 +77,13 @@
   
     .category-item__description h2 {
       font-size: 1.25rem;
+      font-family: sans-serif;
     }
   
     .category-item__price {
       font-size: 1.25rem;
       padding: 0.5rem 1.5rem;
+      font-family: sans-serif;
     }
   }
 
@@ -92,6 +99,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    font-family: sans-serif;
   }
   
   .category-form label {
@@ -100,10 +108,20 @@
     margin-bottom: 0.5rem;
   }
   
-  .category-form input,
-  .category-form select {
-    font: inherit;
-    padding: 0.5rem;
+  .category-form input {
+    font-family: sans-serif;
+    padding: 0.4rem;
+    border-radius: 4px;
+    border: 1px solid #d3d3d3;
+    width: 15rem;
+    max-width: 100%;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .category-form select{
+    font-family: sans-serif;
+    padding: 0.6rem;
     border-radius: 4px;
     border: 1px solid #d3d3d3;
     width: 15rem;
@@ -115,19 +133,19 @@
   .category-form button {
     border-radius: 4px;
     border: none;
-    font-weight: bold;
     cursor: pointer;
     margin-bottom: 0.5rem;
     padding-top: 0.1rem;
   }
   
   .category-form .button-container {
-    padding: 0.5rem;
+    /* padding: 0.5rem; */
+    font-family: sans-serif;
     display: flex;
     justify-content: center;
     gap: 1rem;
     /* margin-top: 0.5rem; */
-    margin-bottom: 0.2rem;
+    /* margin-bottom: 0.2rem; */
   }
   
   .category-form button[type="submit"] {
@@ -154,14 +172,15 @@
   }
   
   .new-category button {
-    font: inherit;
+    font-family: sans-serif;
+    font-size: large;
     cursor: pointer;
-    padding: 1rem 2rem;
-    /* border: 1px solid #40005d; */
+    padding: 0.5rem 1rem;
+    border: 1px solid #3a3a3a;
     background-color: #3a3a3a;
     color: white;
     border-radius: 12px;
-    margin-right: 1rem;
+    /* margin-right: 1rem; */
   }
   
   .new-category button:hover,

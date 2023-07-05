@@ -263,7 +263,7 @@
   
   .new-expense__control .category-select {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.55rem;
     border-radius: 6px;
     width: 18rem;
     border: 1px solid #ccc;
@@ -350,7 +350,7 @@
   }
   
   .edit__control .category-select {
-    padding: 0.5rem;
+    padding: 0.55rem;
     border-radius: 6px;
     width: 18rem;
     max-width: 100%;
