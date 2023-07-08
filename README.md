@@ -32,7 +32,7 @@
 Follow these steps to get the project up and running on your local machine:
 
 **Prerequisites: Microsoft SQL Server must be installed and running.**
-1. Clone the repository to your local machine using the following command: `git clone [<repository-url>](https://github.com/AishikPal22/WalletWizard)`
+1. Clone the repository to your local machine using the following command: `git clone https://github.com/AishikPal22/WalletWizard`
 2. Navigate to the project backend directory: `cd WalletWizard/Backend`
 3. Install dependencies: `dotnet restore`
 4. Set up the database connection by configuring the MS SQL Server connection string in `data/ApplicationDbContext.cs` file
