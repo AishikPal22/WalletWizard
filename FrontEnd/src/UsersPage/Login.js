@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './Main.css';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userData = {
-      email,
+      name,
       password
     };
     setUser(userData);
@@ -69,8 +69,8 @@ const Login = () => {
                       <p class="text-center" style={{cursor:'default'}}>Please login to your account</p>
 
                       <div class="form-outline mb-4">
-                        <input type="email" id="form2Example11" class="form-control"
-                          placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input type="Username" id="form2Example11" class="form-control"
+                          placeholder="Username" value={name} onChange={(e) => setName(e.target.value)} />
                         {/* <label class="form-label" for="form2Example11">Username</label> */}
                       </div>
 

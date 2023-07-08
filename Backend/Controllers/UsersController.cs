@@ -39,14 +39,14 @@ namespace ExpenseTrackerApplication.Controllers
         //https://localhost:7145/api/users/login
         public IActionResult Login([FromBody] User user)
         {
-            var currentUser = _appdb.Users.FirstOrDefault(x => x.Email == user.Email && x.Password == user.Password);
+            var currentUser = _appdb.Users.FirstOrDefault(x => x.Name == user.Name && x.Password == user.Password);
 
             if (currentUser == null) { return NotFound(); }
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var claims = new[] { new Claim(ClaimTypes.Email, user.Email) };
+            var claims = new[] { new Claim(ClaimTypes.Email, currentUser.Email) };
 
             var token = new JwtSecurityToken(
                 issuer: _config["JWT:Issuer"],
