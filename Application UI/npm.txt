@@ -1,5 +1,0 @@
-npm i react react-router-dom react-router react-bootstrap bootstrap axios react-chartjs-2 chart.js @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome
-
-
-
-
