@@ -1,6 +1,6 @@
 # WalletWizard
 
-An expense management app where you can record your everyday transactions.
+### An expense management app where you can record your everyday transactions.
 
 ## Table of Contents
 
