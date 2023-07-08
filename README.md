@@ -7,6 +7,7 @@
 - [Features](#features)
 - [Technologies](#technologies)
 - [Installation](#installation)
+- [Usage](#usage)
 
 ## Features
 
@@ -42,3 +43,15 @@ Follow these steps to get the project up and running on your local machine:
 7. Install the node_modules using the commands provided in `npm.text` file.
 8. Start the React server: `npm start`
 9. Quit both server using `ctrl + c` command.
+
+## Usage
+
+1. Create an account and then log in.
+2. Select the Categories page and add relevant categories for your transactions.
+3. Select the Transactions page and add your transaction data by selecting appropriate category for each data.
+4. Navigate back or select the Home page to check account status.
+5. Go back to the Transaction page to make any changes or delete any data.
+6. Click on the Logout button to terminate your current session.
+7. Log in using valid credentials before next session. No need to register again.
+
+### Thank You!!
