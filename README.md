@@ -20,7 +20,7 @@
 
 1. **Asp.Net Core:** Cross-platform, open-source framework for building web applications with .NET.
 2. **C#:** General-purpose programming language used in ASP.NET Core development.
-3. **Entity Framework Core:** Object-relational mapping (ORM) framework for working with databases in ASP.NET Core.
+3. **Entity Framework Core:** Object-relational mapping framework for working with databases in ASP.NET Core.
 4. **MS SQL Server:** Relational database management system for storing and managing expense data.
 5. **ReactJs:** Front-end JavaScript library for building user interfaces.
 6. **NodeJs:** JavaScript runtime environment for the server-side.
