@@ -38,7 +38,7 @@ Follow these steps to get the project up and running on your local machine:
 4. Set up the database connection by configuring the MS SQL Server connection string in `data/ApplicationDbContext.cs` file
    and run the following command: `dotnet ef database update`
 5. Start the Swagger API server: `dotnet run`
-6. Go back to WalletWizard directory and navigate to project frontend directory: `cd ../` and `cd Frontend`
+6. Go back to WalletWizard directory and navigate to project frontend directory: `cd ../Frontend`
 7. Install the node_modules using the commands provided in `npm.text` file.
 8. Start the React server: `npm start`
 9. Quit both server using `ctrl + c` command.
