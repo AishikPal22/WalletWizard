@@ -16,7 +16,6 @@ namespace ExpenseTrackerApplication.Controllers
 
         [HttpGet]
         [Authorize]
-        //https://localhost:7145/api/categories
         public IActionResult Get()
         {
             var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
@@ -31,7 +30,6 @@ namespace ExpenseTrackerApplication.Controllers
 
         [HttpPost]
         [Authorize]
-        //https://localhost:7145/api/categories
         public IActionResult Post([FromBody] Category category)
         {
             if (category == null) { return NoContent(); }

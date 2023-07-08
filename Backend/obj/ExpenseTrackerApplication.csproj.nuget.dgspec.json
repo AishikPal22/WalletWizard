@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\AP\\source\\repos\\AishikPal22\\Expense-Management-App\\ExpenseTrackerApplication\\ExpenseTrackerApplication.csproj": {}
+    "C:\\Users\\AP\\source\\repos\\AishikPal22\\WalletWizard\\Backend\\ExpenseTrackerApplication.csproj": {}
   },
   "projects": {
-    "C:\\Users\\AP\\source\\repos\\AishikPal22\\Expense-Management-App\\ExpenseTrackerApplication\\ExpenseTrackerApplication.csproj": {
+    "C:\\Users\\AP\\source\\repos\\AishikPal22\\WalletWizard\\Backend\\ExpenseTrackerApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AP\\source\\repos\\AishikPal22\\Expense-Management-App\\ExpenseTrackerApplication\\ExpenseTrackerApplication.csproj",
+        "projectUniqueName": "C:\\Users\\AP\\source\\repos\\AishikPal22\\WalletWizard\\Backend\\ExpenseTrackerApplication.csproj",
         "projectName": "ExpenseTrackerApplication",
-        "projectPath": "C:\\Users\\AP\\source\\repos\\AishikPal22\\Expense-Management-App\\ExpenseTrackerApplication\\ExpenseTrackerApplication.csproj",
+        "projectPath": "C:\\Users\\AP\\source\\repos\\AishikPal22\\WalletWizard\\Backend\\ExpenseTrackerApplication.csproj",
         "packagesPath": "C:\\Users\\AP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AP\\source\\repos\\AishikPal22\\Expense-Management-App\\ExpenseTrackerApplication\\obj\\",
+        "outputPath": "C:\\Users\\AP\\source\\repos\\AishikPal22\\WalletWizard\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\AP\\AppData\\Roaming\\NuGet\\NuGet.Config",

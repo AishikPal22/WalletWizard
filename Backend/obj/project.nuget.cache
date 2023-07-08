@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hoDyZdfidDmtXG5zceH4QluJemXl6h5DZH51WbVZjKD+SfhSY5VggT5MEgGe7bEThWVWA5TzWexP0UsPGPo7ag==",
+  "dgSpecHash": "jQ9q/BlRL8wVKZSp+jLXXv37YoTRjpvmBrReoWlY8EqyxVDzxXOoqLezZegbJrzPKZwy2ZHwG61feITPOaQrsA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\AP\\source\\repos\\AishikPal22\\Expense-Management-App\\ExpenseTrackerApplication\\ExpenseTrackerApplication.csproj",
+  "projectFilePath": "C:\\Users\\AP\\source\\repos\\AishikPal22\\WalletWizard\\Backend\\ExpenseTrackerApplication.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AP\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\AP\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

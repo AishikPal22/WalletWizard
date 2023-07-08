@@ -22,7 +22,6 @@ namespace ExpenseTrackerApplication.Controllers
         }
 
         [HttpPost("[action]")]
-        //https://localhost:7145/api/users/register
         public IActionResult Register([FromBody] User user)
         {
             var userExists = _appdb.Users.FirstOrDefault(u => u.Email == user.Email);
@@ -36,7 +35,6 @@ namespace ExpenseTrackerApplication.Controllers
         }
 
         [HttpPost("[action]")]
-        //https://localhost:7145/api/users/login
         public IActionResult Login([FromBody] User user)
         {
             var currentUser = _appdb.Users.FirstOrDefault(x => x.Name == user.Name && x.Password == user.Password);
@@ -59,26 +57,3 @@ namespace ExpenseTrackerApplication.Controllers
         }
     }
 }
-
-        //[HttpPost("[action]")]
-        ////https://localhost:7145/api/users/logout
-        //public IActionResult Logout()
-        //{
-        //    // Invalidate the token by setting its expiration time to a past date/time
-        //    var token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
-        //    var jwtHandler = new JwtSecurityTokenHandler();
-        //    var jwtToken = jwtHandler.ReadToken(token) as JwtSecurityToken;
-
-        //    var expiredToken = new JwtSecurityToken(
-        //        _config["JWT:Issuer"],
-        //        _config["JWT:Audience"],
-        //        jwtToken.Claims,
-        //        DateTime.Now,
-        //        DateTime.Now.AddMinutes(-60),  // Expired token with negative expiration time
-        //        jwtToken.SigningCredentials
-        //    );
-
-        //    var newToken = jwtHandler.WriteToken(expiredToken);
-
-        //    return Ok("Logout successful");
-        //}

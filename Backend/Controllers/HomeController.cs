@@ -16,7 +16,6 @@ namespace ExpenseTrackerApplication.Controllers
 
         [HttpGet("CurrentBalance")]
         [Authorize]
-        //https://localhost:7145/api/home/currentbalance
         public IActionResult GetBalance()
         {
             var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
