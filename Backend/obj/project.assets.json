@@ -3975,11 +3975,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\AP\\source\\repos\\AishikPal22\\WalletWizard\\Backend\\ExpenseTrackerApplication.csproj",
+      "projectUniqueName": "D:\\Documents\\WORK\\PROJECT\\WalletWizard\\Backend\\ExpenseTrackerApplication.csproj",
       "projectName": "ExpenseTrackerApplication",
-      "projectPath": "C:\\Users\\AP\\source\\repos\\AishikPal22\\WalletWizard\\Backend\\ExpenseTrackerApplication.csproj",
+      "projectPath": "D:\\Documents\\WORK\\PROJECT\\WalletWizard\\Backend\\ExpenseTrackerApplication.csproj",
       "packagesPath": "C:\\Users\\AP\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\AP\\source\\repos\\AishikPal22\\WalletWizard\\Backend\\obj\\",
+      "outputPath": "D:\\Documents\\WORK\\PROJECT\\WalletWizard\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\AP\\AppData\\Roaming\\NuGet\\NuGet.Config",
